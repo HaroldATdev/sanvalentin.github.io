@@ -5,6 +5,7 @@
 const valentinesDay = new Date('2026-02-14T00:00:00').getTime();
 let currentPhotoIndex = 0;
 let gameActive = false;
+let audioInitialized = false;
 
 // ARRAY DE MOMENTOS - SOPORTA IMÁGENES Y VIDEOS
 // ==========================================
@@ -49,13 +50,23 @@ document.addEventListener('DOMContentLoaded', function() {
     // Configurar audio de fondo
     const bgMusic = document.getElementById('bgMusic');
     if (bgMusic) {
-        bgMusic.volume = 0.4; // 40% de volumen
+        bgMusic.volume = 0.3; // 40% de volumen
         bgMusic.currentTime = 140; // Iniciar en 2:20 (140 segundos)
         
-        // Reproducir automáticamente (silenciado)
-        bgMusic.play().catch(err => {
-            console.log('Error al reproducir audio:', err);
-        });
+        // Reproducir al primer clic del usuario
+        const playMusic = function() {
+            if (!audioInitialized) {
+                bgMusic.play().catch(err => {
+                    console.log('Error al reproducir audio:', err);
+                });
+                audioInitialized = true;
+                document.removeEventListener('click', playMusic);
+                document.removeEventListener('touchstart', playMusic);
+            }
+        };
+        
+        document.addEventListener('click', playMusic);
+        document.addEventListener('touchstart', playMusic);
     }
     
     initCountdown();
