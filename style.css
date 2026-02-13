@@ -33,7 +33,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 60px 20px;
+    padding: 60px 20px 100px 20px;
     scroll-snap-align: start;
 }
 
@@ -96,14 +96,13 @@ body {
    ============================================ */
 
 .countdown-container {
-    margin-bottom: 50px;
-}
+        margin-bottom: 35px;
+    }
 
-.countdown-title {
-    font-size: 1.2rem;
-    color: rgba(255,255,255,0.9);
-    margin-bottom: 20px;
-    animation: fadeInUp 1s ease-out 0.5s both;
+    .countdown-title {
+        font-size: 1rem;
+        color: rgba(255,255,255,0.9);
+        margin-bottom: 15px;
 }
 
 .countdown {
@@ -120,15 +119,9 @@ body {
     align-items: center;
     background: rgba(255,255,255,0.2);
     backdrop-filter: blur(10px);
-    padding: 20px;
-    border-radius: 15px;
-    min-width: 080px;
-    animation: fadeInUp 1s ease-out 0.7s both;
-}
-
-.countdown-value {
-    font-size: 2.5rem;
-    font-weight: 700;
+        padding: 12px;
+        border-radius: 12px;
+        min-width: 60px;
     color: white;
     display: block;
 }
@@ -413,7 +406,7 @@ body {
 .juego-card {
     background: rgba(255,255,255,0.1);
     backdrop-filter: blur(10px);
-    padding: 40px;
+    padding: 30px 20px;
     border-radius: 20px;
     text-align: center;
     cursor: pointer;
@@ -423,7 +416,7 @@ body {
     -webkit-tap-highlight-color: transparent;
     -webkit-user-select: none;
     user-select: none;
-    min-height: 200px;
+    min-height: 180px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -490,7 +483,7 @@ body {
 
 .modal-content {
     background: white;
-    padding: 40px;
+    padding: 30px 20px;
     border-radius: 20px;
     max-width: 500px;
     width: 100%;
@@ -531,7 +524,7 @@ body {
 .mensaje-box {
     background: rgba(255,255,255,0.1);
     backdrop-filter: blur(10px);
-    padding: 50px;
+    padding: 40px 30px;
     border-radius: 20px;
     border: 2px solid rgba(255,255,255,0.2);
     max-width: 700px;
@@ -563,38 +556,42 @@ body {
 
 .navbar {
     position: fixed;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
+    bottom: 8px;
+    left: 5px;
+    right: 5px;
     background: rgba(255,255,255,0.1);
     backdrop-filter: blur(10px);
     border: 2px solid rgba(255,255,255,0.2);
-    padding: 15px 30px;
-    border-radius: 50px;
+    padding: 8px 10px;
+    border-radius: 15px;
     display: flex;
-    gap: 15px;
+    gap: 6px;
     z-index: 500;
     flex-wrap: wrap;
     justify-content: center;
-    max-width: 90vw;
+    max-width: calc(100% - 10px);
+    max-height: 50px;
+    overflow-y: hidden;
 }
 
 .nav-btn {
     background: rgba(255,255,255,0.2);
     color: white;
     border: 1px solid rgba(255,255,255,0.3);
-    padding: 8px 16px;
-    border-radius: 25px;
+    padding: 6px 12px;
+    border-radius: 15px;
     cursor: pointer;
-    font-size: 0.9rem;
+    font-size: 0.75rem;
     font-weight: 600;
     transition: all 0.3s ease;
     -webkit-tap-highlight-color: transparent;
-    min-height: 44px;
-    min-width: 60px;
+    min-height: 32px;
+    min-width: 50px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .nav-btn:hover {
@@ -612,10 +609,10 @@ body {
 
 .music-toggle {
     position: fixed;
-    top: 30px;
-    right: 30px;
-    width: 60px;
-    height: 60px;
+    top: 12px;
+    right: 12px;
+    width: 45px;
+    height: 45px;
     background: rgba(255,255,255,0.2);
     backdrop-filter: blur(10px);
     border: 2px solid white;
@@ -624,12 +621,12 @@ body {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     transition: all 0.3s ease;
     z-index: 400;
     -webkit-tap-highlight-color: transparent;
-    min-height: 48px;
-    min-width: 48px;
+    min-height: 45px;
+    min-width: 45px;
 }
 
 .music-toggle:hover {
@@ -810,7 +807,7 @@ body {
 
 @media (max-width: 768px) {
     .section {
-        padding: 40px 15px;
+        padding: 40px 15px 100px 15px;
         min-height: auto;
     }
 
@@ -820,13 +817,13 @@ body {
     }
 
     .titulo-inicio {
-        font-size: 2.5rem;
-        margin-bottom: 15px;
+        font-size: 2.2rem;
+        margin-bottom: 10px;
     }
 
     .subtitle {
-        font-size: 1.1rem;
-        margin-bottom: 40px;
+        font-size: 0.95rem;
+        margin-bottom: 35px;
     }
 
     /* COUNTDOWN */
@@ -1039,7 +1036,7 @@ body {
 
 @media (max-width: 600px) {
     .section {
-        padding: 30px 12px;
+        padding: 25px 10px 90px 10px;
         min-height: auto;
     }
 
@@ -1049,23 +1046,23 @@ body {
     }
 
     .titulo-inicio {
-        font-size: 2rem;
-        margin-bottom: 10px;
+        font-size: 1.8rem;
+        margin-bottom: 8px;
     }
 
     .subtitle {
-        font-size: 1rem;
-        margin-bottom: 30px;
+        font-size: 0.9rem;
+        margin-bottom: 20px;
     }
 
     /* COUNTDOWN */
     .countdown-container {
-        margin-bottom: 30px;
+        margin-bottom: 25px;
     }
 
     .countdown-title {
-        font-size: 0.9rem;
-        margin-bottom: 12px;
+        font-size: 0.85rem;
+        margin-bottom: 10px;
     }
 
     .countdown {
@@ -1073,13 +1070,13 @@ body {
     }
 
     .countdown-item {
-        min-width: 55px;
-        padding: 10px 8px;
-        border-radius: 10px;
+        min-width: 50px;
+        padding: 8px 6px;
+        border-radius: 8px;
     }
 
     .countdown-value {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
     }
 
     .countdown-label {
@@ -1092,18 +1089,20 @@ body {
     }
 
     .btn-start {
-        padding: 12px 25px;
-        font-size: 0.95rem;
-        border-radius: 45px;
+        padding: 10px 20px;
+        font-size: 0.9rem;
+        width: 85%;
+        max-width: 280px;
     }
 
     /* GALERÍA */
     .carousel-3d {
-        height: 280px;
+        height: 250px;
     }
 
     .galeria-container {
         max-width: 100%;
+        padding: 0 5px;
     }
 
     .carousel-btn {
@@ -1242,7 +1241,7 @@ body {
 
 @media (max-width: 480px) {
     .section {
-        padding: 25px 10px;
+        padding: 20px 8px 85px 8px;
         min-height: auto;
     }
 
@@ -1534,17 +1533,92 @@ body {
 }
 
 /* ============================================
-   RESPONSIVE - TABLET EN HORIZONTAL (1024px+)
+   RESPONSIVE - MÓVILES MUY PEQUEÑOS (max-width: 360px)
    ============================================ */
 
-@media (orientation: landscape) and (min-height: 600px) and (max-width: 1024px) {
+@media (max-width: 360px) {
     .section {
-        min-height: 100vh;
-        padding: 40px 20px;
+        padding: 15px 6px 85px 6px;
+    }
+
+    .section-title {
+        font-size: 1.3rem;
+        margin-bottom: 20px;
+    }
+
+    .titulo-inicio {
+        font-size: 1.6rem;
+        margin-bottom: 5px;
+    }
+
+    .subtitle {
+        font-size: 0.8rem;
+        margin-bottom: 15px;
+    }
+
+    .countdown-container {
+        margin-bottom: 20px;
+    }
+
+    .countdown-title {
+        font-size: 0.75rem;
+        margin-bottom: 8px;
+    }
+
+    .countdown-item {
+        min-width: 45px;
+        padding: 6px 4px;
+        border-radius: 6px;
+    }
+
+    .countdown-value {
+        font-size: 1.1rem;
+    }
+
+    .countdown-label {
+        font-size: 0.55rem;
+    }
+
+    .btn-start {
+        padding: 8px 16px;
+        font-size: 0.8rem;
+        width: 80%;
+        max-width: 250px;
     }
 
     .carousel-3d {
-        height: 400px;
+        height: 200px;
+    }
+
+    .carousel-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 0.9rem;
+    }
+
+    .section-title {
+        font-size: 1.3rem;
+    }
+
+    .juego-card {
+        padding: 18px 12px;
+        min-height: 150px;
+    }
+
+    .juego-icon {
+        font-size: 2.2rem;
+    }
+
+    .modal-content {
+        padding: 20px 15px;
+    }
+
+    .music-toggle {
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
+        top: 10px;
+        right: 10px;
     }
 }
 
