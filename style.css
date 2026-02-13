@@ -73,6 +73,11 @@ body {
     position: relative;
     z-index: 2;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
 }
 
 .titulo-inicio {
@@ -1050,6 +1055,10 @@ body {
         min-height: auto;
     }
 
+    .inicio-section {
+        min-height: 120vh;
+    }
+
     .section-title {
         font-size: 1.7rem;
         margin-bottom: 30px;
@@ -1254,6 +1263,10 @@ body {
     .section {
         padding: 20px 8px 85px 8px;
         min-height: auto;
+    }
+
+    .inicio-section {
+        min-height: 130vh;
     }
 
     .section-title {
@@ -1549,6 +1562,10 @@ body {
 @media (max-width: 360px) {
     .section {
         padding: 15px 6px 85px 6px;
+    }
+
+    .inicio-section {
+        min-height: 140vh;
     }
 
     .section-title {
