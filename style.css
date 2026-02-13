@@ -226,9 +226,9 @@ body {
 }
 
 .carousel-item.video-item video {
-    transform: rotate(90deg);
-    width: 141%;
+    transform: rotate(-90deg);
     height: 141%;
+    width: 141%;
     margin: -20.5% 0 0 -20.5%;
 }
 
