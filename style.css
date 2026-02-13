@@ -225,6 +225,13 @@ body {
     z-index: 5;
 }
 
+.carousel-item.video-item video {
+    transform: rotate(90deg);
+    width: 141%;
+    height: 141%;
+    margin: -20.5% 0 0 -20.5%;
+}
+
 .carousel-item img {
     width: 100%;
     height: 100%;
