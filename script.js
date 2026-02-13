@@ -50,8 +50,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Configurar audio de fondo
     const bgMusic = document.getElementById('bgMusic');
     if (bgMusic) {
-        bgMusic.volume = 0.3; // 40% de volumen
-        bgMusic.currentTime = 140; // Iniciar en 2:20 (140 segundos)
+        bgMusic.volume = 0.2; // 40% de volumen
+        bgMusic.currentTime = 150; // Iniciar en 2:30 (150 segundos)
         
         // Reproducir al primer clic del usuario
         const playMusic = function() {
@@ -675,7 +675,30 @@ document.addEventListener('DOMContentLoaded', function() {
 function scrollToSection(sectionId) {
     const element = document.getElementById(sectionId);
     if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+        const targetPosition = element.offsetTop;
+        const startPosition = window.pageYOffset;
+        const distance = targetPosition - startPosition;
+        const duration = 1000; // 1 segundo de duración
+        let start = null;
+
+        function animation(currentTime) {
+            if (start === null) start = currentTime;
+            const elapsed = currentTime - start;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            // Easing function para movimiento suave
+            const easeInOutQuad = progress < 0.5 
+                ? 2 * progress * progress 
+                : -1 + (4 - 2 * progress) * progress;
+            
+            window.scrollTo(0, startPosition + distance * easeInOutQuad);
+
+            if (elapsed < duration) {
+                requestAnimationFrame(animation);
+            }
+        }
+
+        requestAnimationFrame(animation);
     }
 }
 
