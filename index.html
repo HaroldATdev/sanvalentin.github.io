@@ -1,41 +1,180 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Marck+Script&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Marck+Script&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <title>Carta de Regalo</title>
+    <title>Mi Amor - 14 de Febrero ❤️</title>
 </head>
 <body>
-    <h1>¡Feliz Día de la novia mi Meli! ❤️</h1>
-    <div class="container">
-        <div class="envelope-wrapper ">
-            <div class="envelope">
-                <div class="letter">
-                    <div class="text">
-                        <strong>Querida Melina</strong>
-                        <p>
-                            Este día <strong>de la novia</strong>, es uno en el que <em>una niña preciosa</em> decidío quedarse conmigo <em>en las buenas y en las malas</em> y además el día en el que puedo decirte unas cuantas palabras que vienen dentro de mi corazón.
-                            Así que prepárate, porque aquí va: Desde que te conocí, no he pedido dejar de pasarla super bien, no sé si te diste cuenta pero el primer día en el que nos conocimos nos dimos un primer cabezazo XD y un beso <3
-                           Eres muy <code>especial</code> para mí y lo sabes. Si fueras una visita, serías la que siempre esperé y no me arrepiento de recibir. 
-                            Gracias por hacer de mi vida un poco más divertida, sin forzar nada (bueno, quizá yo por ser muy empalagoso contigo, pero así te gusto jeje). 
-                            <br> <strong>Quiero recordarte que todos los días son tuyos</strong>, mi <em>niña hermosa</em>. <br> Con mucho <strong>cariño</strong> (y <strong>horas sin dormir</strong>), <br> 
-                            Un programador que te quiere mucho. <br> <span style="font-size: 0.9em; color: grey;">PD: Sé que no esperabas algo de mí pero aquí esta:</span> <br> 
-                            <code>"Gracias por ser quien eres: esa mujer fuerte, tierna, única y llena de magia que convierte lo ordinario en extraordinario. 
-                                Prometo no solo celebrarte un día al año, sino todos los días, con detalles, abrazos y este corazón que es tuyo desde que llegaste."</code>
-                        </p>
+    <!-- SECCIÓN 1: PANTALLA INICIAL CON CUENTA REGRESIVA -->
+    <section id="inicio" class="section inicio-section">
+        <div class="confetti-container"></div>
+        <div class="content-wrapper">
+            <h1 class="titulo-inicio">¡Feliz Día, Mi Amor! 💕</h1>
+            <p class="subtitle">Una experiencia especial para ti</p>
+            
+            <div class="countdown-container">
+                <div class="countdown-title">Tiempo hasta el 14 de Febrero</div>
+                <div class="countdown">
+                    <div class="countdown-item">
+                        <span class="countdown-value" id="dias">00</span>
+                        <span class="countdown-label">Días</span>
+                    </div>
+                    <span class="countdown-separator">:</span>
+                    <div class="countdown-item">
+                        <span class="countdown-value" id="horas">00</span>
+                        <span class="countdown-label">Horas</span>
+                    </div>
+                    <span class="countdown-separator">:</span>
+                    <div class="countdown-item">
+                        <span class="countdown-value" id="minutos">00</span>
+                        <span class="countdown-label">Minutos</span>
+                    </div>
+                    <span class="countdown-separator">:</span>
+                    <div class="countdown-item">
+                        <span class="countdown-value" id="segundos">00</span>
+                        <span class="countdown-label">Segundos</span>
                     </div>
                 </div>
             </div>
-            <div class="heart"></div>
-            <div class="tap-right"></div>
-            <div class="tap-left"></div>
+
+            <button class="btn-start" onclick="scrollToSection('galeria')">Comenzar la Aventura ➜</button>
         </div>
+    </section>
+
+    <!-- SECCIÓN 2: GALERÍA DE FOTOS CON CARRUSEL 3D -->
+    <section id="galeria" class="section galeria-section">
+        <h2 class="section-title">Nuestros Momentos Especiales</h2>
+        <div class="galeria-container">
+            <div class="carousel-3d">
+                <div class="carousel-track" id="carouselTrack">
+                    <!-- Las fotos se generarán dinámicamente -->
+                </div>
+            </div>
+            <button class="carousel-btn prev" onclick="previousPhoto()">❮</button>
+            <button class="carousel-btn next" onclick="nextPhoto()">❯</button>
+        </div>
+        <div class="photo-counter">
+            <span id="currentPhoto">1</span> / <span id="totalPhotos">6</span>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 3: LÍNEA DE TIEMPO -->
+    <section id="timeline" class="section timeline-section">
+        <h2 class="section-title">Nuestro Viaje Juntos</h2>
+        <div class="timeline-container">
+            <div class="timeline-item" onclick="expandTimeline(this)">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <h3>El Primer Encuentro</h3>
+                    <p class="timeline-date">Del primer cabezazo al primer beso 💫</p>
+                    <p class="timeline-description">Ese día mágico donde todo cambió...</p>
+                </div>
+            </div>
+
+            <div class="timeline-item" onclick="expandTimeline(this)">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <h3>Las Buenas y las Malas</h3>
+                    <p class="timeline-date">Decidiste quedarte conmigo siempre 💪</p>
+                    <p class="timeline-description">Gracias por estar en cada momento...</p>
+                </div>
+            </div>
+
+            <div class="timeline-item" onclick="expandTimeline(this)">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <h3>Mi Niña Hermosa</h3>
+                    <p class="timeline-date">Cada día contigo es especial ✨</p>
+                    <p class="timeline-description">Sin forzar nada, solo siendo tú...</p>
+                </div>
+            </div>
+
+            <div class="timeline-item" onclick="expandTimeline(this)">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <h3>Hoy y Siempre</h3>
+                    <p class="timeline-date">14 de Febrero - Un nuevo capítulo 🎉</p>
+                    <p class="timeline-description">El día en que celebro todo lo que eres...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 4: MINI JUEGOS -->
+    <section id="juegos" class="section juegos-section">
+        <h2 class="section-title">Juegos del Amor</h2>
+        <div class="juegos-container">
+            <div class="juego-card" onclick="startGame('parejas')">
+                <div class="juego-icon">🎴</div>
+                <h3>Parejas Románticas</h3>
+                <p>Encuentra las parejas de imágenes</p>
+            </div>
+
+            <div class="juego-card" onclick="startGame('trivia')">
+                <div class="juego-icon">❓</div>
+                <h3>Trivia del Amor</h3>
+                <p>¿Cuánto me conoces?</p>
+            </div>
+
+            <div class="juego-card" onclick="startGame('corazones')">
+                <div class="juego-icon">💕</div>
+                <h3>Recoge Corazones</h3>
+                <p>Un juego interactivo divertido</p>
+            </div>
+        </div>
+
+        <!-- Modal para los juegos -->
+        <div id="gameModal" class="modal hidden">
+            <div class="modal-content">
+                <button class="close-btn" onclick="closeGame()">✕</button>
+                <div id="gameContent"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 5: MENSAJE FINAL -->
+    <section id="mensaje" class="section mensaje-section">
+        <div class="mensaje-box">
+            <h2>Un Mensaje Especial Para Ti</h2>
+            <p class="mensaje-texto marck-script">
+                Querida Melina,<br><br>
+                Este día es uno en el que una niña preciosa decidió quedarse conmigo en las buenas y en las malas.
+                Eres muy especial para mí y lo sabes.<br><br>
+                Gracias por hacer de mi vida un poco más divertida, sin forzar nada (bueno, quizá yo por ser muy empalagoso contigo, pero así te gusto jeje).<br><br>
+                <strong>Quiero recordarte que todos los días son tuyos, mi niña hermosa.</strong><br><br>
+                <em>"Gracias por ser quien eres: esa mujer fuerte, tierna, única y llena de magia que convierte lo ordinario en extraordinario. 
+                Prometo no solo celebrarte un día al año, sino todos los días, con detalles, abrazos y este corazón que es tuyo desde que llegaste."</em><br><br>
+                Con mucho cariño (y horas sin dormir),<br>
+                <strong>Un programador que te quiere mucho ❤️</strong>
+            </p>
+        </div>
+    </section>
+
+    <!-- BOTÓN FLOTANTE DE MÚSICA -->
+    <div class="music-toggle" onclick="toggleMusic()">
+        <span id="musicIcon">🔊</span>
     </div>
-    
+
+    <!-- AUDIO (oculto) -->
+    <audio id="bgMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- BARRA DE NAVEGACIÓN -->
+    <nav class="navbar">
+        <button onclick="scrollToSection('inicio')" class="nav-btn">Inicio</button>
+        <button onclick="scrollToSection('galeria')" class="nav-btn">Galería</button>
+        <button onclick="scrollToSection('timeline')" class="nav-btn">Timeline</button>
+        <button onclick="scrollToSection('juegos')" class="nav-btn">Juegos</button>
+        <button onclick="scrollToSection('mensaje')" class="nav-btn">Mensaje</button>
+    </nav>
+
     <script src="script.js"></script>
 </body>
 </html>
+
