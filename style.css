@@ -1055,9 +1055,14 @@ body {
         display: none;
     }
 
-    .section {
-        padding: 25px 10px 90px 10px;
-        min-height: auto;
+    .music-toggle {
+        display: flex !important;
+        visibility: visible !important;
+        top: 15px;
+        right: 15px;
+        width: 50px;
+        height: 50px;
+        font-size: 1.3rem;
     }
 
     .inicio-section {
@@ -1268,6 +1273,16 @@ body {
 @media (max-width: 480px) {
     .navbar {
         display: none;
+    }
+
+    .music-toggle {
+        display: flex !important;
+        visibility: visible !important;
+        top: 12px;
+        right: 12px;
+        width: 48px;
+        height: 48px;
+        font-size: 1.2rem;
     }
 
     .section {
@@ -1573,6 +1588,16 @@ body {
 @media (max-width: 360px) {
     .navbar {
         display: none;
+    }
+
+    .music-toggle {
+        display: flex !important;
+        visibility: visible !important;
+        top: 10px;
+        right: 10px;
+        width: 45px;
+        height: 45px;
+        font-size: 1.1rem;
     }
 
     .section {
