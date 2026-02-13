@@ -557,8 +557,8 @@ body {
 .navbar {
     position: fixed;
     bottom: 8px;
-    left: 5px;
-    right: 5px;
+    left: 50%;
+    transform: translateX(-50%);
     background: rgba(255,255,255,0.1);
     backdrop-filter: blur(10px);
     border: 2px solid rgba(255,255,255,0.2);
@@ -570,7 +570,7 @@ body {
     flex-wrap: nowrap;
     justify-content: flex-start;
     overflow-x: auto;
-    width: auto;
+    width: fit-content;
     max-height: 50px;
     scroll-behavior: smooth;
     scrollbar-width: none;
@@ -1007,12 +1007,11 @@ body {
     .navbar {
         position: fixed;
         bottom: 12px;
-        left: 8px;
-        right: 8px;
-        transform: none;
+        left: 50%;
+        transform: translateX(-50%);
         padding: 8px 10px;
         gap: 5px;
-        width: auto;
+        width: fit-content;
         overflow-x: auto;
         justify-content: flex-start;
         box-sizing: border-box;
@@ -1219,13 +1218,12 @@ body {
     /* NAVBAR */
     .navbar {
         bottom: 10px;
-        left: 6px;
-        right: 6px;
-        transform: none;
+        left: 50%;
+        transform: translateX(-50%);
         padding: 7px 8px;
         gap: 4px;
         border-radius: 12px;
-        width: auto;
+        width: fit-content;
         overflow-x: auto;
         box-sizing: border-box;
     }
@@ -1451,13 +1449,12 @@ body {
     /* NAVBAR */
     .navbar {
         bottom: 8px;
-        left: 5px;
-        right: 5px;
-        transform: none;
+        left: 50%;
+        transform: translateX(-50%);
         padding: 6px 6px;
         gap: 3px;
         border-radius: 10px;
-        width: auto;
+        width: fit-content;
         overflow-x: auto;
         box-sizing: border-box;
     }
