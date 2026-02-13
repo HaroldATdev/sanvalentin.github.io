@@ -418,6 +418,79 @@ document.addEventListener('click', function(e) {
 });
 
 // ============================================
+// SOPORTE PARA SWIPE EN GALERÍA (MÓVIL)
+// ============================================
+
+let touchStartX = 0;
+let touchEndX = 0;
+
+function handleSwipe() {
+    if (touchEndX < touchStartX - 50) {
+        // Swipe izquierda = siguiente foto
+        nextPhoto();
+    } else if (touchEndX > touchStartX + 50) {
+        // Swipe derecha = foto anterior
+        previousPhoto();
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const carousel = document.querySelector('.carousel-3d');
+    
+    if (carousel) {
+        carousel.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        }, false);
+
+        carousel.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, false);
+    }
+});
+
+// ============================================
+// DETECTAR DISPOSITIVO MÓVIL
+// ============================================
+
+function isMobileDevice() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
+// Ajustar interactividad para móviles
+document.addEventListener('DOMContentLoaded', function() {
+    if (isMobileDevice()) {
+        // Agregar clase al body para estilos específicos de móvil
+        document.body.classList.add('mobile-device');
+        
+        // Desactivar hover effects en móvil
+        const style = document.createElement('style');
+        style.textContent = `
+            @media (hover: none) {
+                .carousel-btn:hover {
+                    background: rgba(255,255,255,0.3);
+                    transform: translateY(-50%);
+                }
+                
+                .juego-card:hover {
+                    transform: none;
+                }
+                
+                .nav-btn:hover {
+                    background: rgba(255,255,255,0.2);
+                    transform: none;
+                }
+                
+                .music-toggle:hover {
+                    transform: none;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+});
+
+// ============================================
 // NAVEGACIÓN SUAVE
 // ============================================
 

@@ -18,6 +18,10 @@ body {
     color: #333;
     overflow-x: hidden;
     position: relative;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 /* ============================================
@@ -157,6 +161,12 @@ body {
     transition: all 0.3s ease;
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     animation: fadeInUp 1s ease-out 0.9s both;
+    -webkit-tap-highlight-color: transparent;
+    min-height: 48px;
+    min-width: 120px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .btn-start:hover {
@@ -244,11 +254,21 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     z-index: 20;
+    -webkit-tap-highlight-color: transparent;
+    min-height: 48px;
+    min-width: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .carousel-btn:hover {
     background: rgba(255,255,255,0.5);
     transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-btn:active {
+    transform: translateY(-50%) scale(0.95);
 }
 
 .carousel-btn.prev {
@@ -400,6 +420,14 @@ body {
     transition: all 0.3s ease;
     border: 2px solid rgba(255,255,255,0.2);
     animation: fadeInUp 0.8s ease-out forwards;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-user-select: none;
+    user-select: none;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .juego-card:nth-child(1) { animation-delay: 0.1s; }
@@ -410,6 +438,10 @@ body {
     background: rgba(255,255,255,0.2);
     transform: translateY(-10px);
     box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+}
+
+.juego-card:active {
+    transform: translateY(-5px);
 }
 
 .juego-icon {
@@ -556,11 +588,21 @@ body {
     font-size: 0.9rem;
     font-weight: 600;
     transition: all 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
+    min-height: 44px;
+    min-width: 60px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .nav-btn:hover {
     background: rgba(255,255,255,0.4);
     transform: translateY(-2px);
+}
+
+.nav-btn:active {
+    transform: translateY(0);
 }
 
 /* ============================================
@@ -584,11 +626,18 @@ body {
     font-size: 1.8rem;
     transition: all 0.3s ease;
     z-index: 400;
+    -webkit-tap-highlight-color: transparent;
+    min-height: 48px;
+    min-width: 48px;
 }
 
 .music-toggle:hover {
     background: rgba(255,255,255,0.4);
     transform: scale(1.1);
+}
+
+.music-toggle:active {
+    transform: scale(0.95);
 }
 
 /* ============================================
@@ -715,109 +764,773 @@ body {
 }
 
 /* ============================================
-   RESPONSIVE
+   RESPONSIVE - TABLETS Y DISPOSITIVOS MEDIANOS
+   ============================================ */
+
+@media (max-width: 1024px) {
+    .section {
+        padding: 50px 20px;
+        min-height: auto;
+    }
+
+    .titulo-inicio {
+        font-size: 3.5rem;
+    }
+
+    .section-title {
+        font-size: 2.5rem;
+    }
+
+    .carousel-3d {
+        height: 350px;
+    }
+
+    .galeria-container {
+        max-width: 500px;
+    }
+
+    .mensaje-box {
+        padding: 40px 30px;
+        max-width: 600px;
+    }
+
+    .juegos-container {
+        gap: 20px;
+    }
+
+    .juego-card {
+        padding: 30px;
+    }
+}
+
+/* ============================================
+   RESPONSIVE - TABLETS (768px a 1024px)
    ============================================ */
 
 @media (max-width: 768px) {
-    .titulo-inicio {
-        font-size: 2.5rem;
+    .section {
+        padding: 40px 15px;
+        min-height: auto;
     }
 
     .section-title {
         font-size: 2rem;
+        margin-bottom: 40px;
+    }
+
+    .titulo-inicio {
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+    }
+
+    .subtitle {
+        font-size: 1.1rem;
+        margin-bottom: 40px;
+    }
+
+    /* COUNTDOWN */
+    .countdown-title {
+        font-size: 1rem;
+        margin-bottom: 15px;
     }
 
     .countdown {
         gap: 5px;
+        flex-wrap: wrap;
+        justify-content: center;
     }
 
     .countdown-item {
-        min-width: 60px;
-        padding: 15px;
+        min-width: 65px;
+        padding: 12px;
+        border-radius: 12px;
     }
 
     .countdown-value {
         font-size: 1.8rem;
     }
 
+    .countdown-label {
+        font-size: 0.75rem;
+    }
+
     .countdown-separator {
+        font-size: 1rem;
+    }
+
+    .btn-start {
+        padding: 12px 30px;
+        font-size: 1rem;
+    }
+
+    /* GALERÍA */
+    .carousel-3d {
+        height: 320px;
+    }
+
+    .carousel-item {
+        border-radius: 15px;
+    }
+
+    .carousel-btn {
+        width: 45px;
+        height: 45px;
         font-size: 1.2rem;
     }
 
+    .carousel-btn.prev {
+        left: 5px;
+    }
+
+    .carousel-btn.next {
+        right: 5px;
+    }
+
+    .galeria-container {
+        max-width: 450px;
+    }
+
+    .photo-counter {
+        font-size: 1rem;
+        margin-top: 20px;
+    }
+
+    /* TIMELINE */
+    .timeline-container {
+        max-width: 100%;
+    }
+
     .timeline-container::before {
-        left: 20px;
+        left: 15px;
+    }
+
+    .timeline-item {
+        margin-bottom: 40px;
     }
 
     .timeline-item:nth-child(odd),
     .timeline-item:nth-child(even) {
         margin-left: 0;
         margin-right: 0;
-        padding-left: 60px;
+        padding-left: 50px;
         text-align: left;
     }
 
     .timeline-marker {
-        left: 20px;
+        left: 15px;
+        width: 18px;
+        height: 18px;
+        border-width: 3px;
     }
 
-    .carousel-btn.prev {
-        left: 10px;
+    .timeline-item:hover .timeline-marker {
+        width: 26px;
+        height: 26px;
+        top: 17px;
     }
 
-    .carousel-btn.next {
-        right: 10px;
+    .timeline-content {
+        padding: 20px;
+        border-radius: 12px;
     }
 
+    .timeline-content h3 {
+        font-size: 1.2rem;
+    }
+
+    .timeline-date {
+        font-size: 0.85rem;
+    }
+
+    .timeline-description {
+        font-size: 0.9rem;
+    }
+
+    /* JUEGOS */
+    .juegos-container {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        max-width: 100%;
+    }
+
+    .juego-card {
+        padding: 25px;
+        border-radius: 15px;
+    }
+
+    .juego-icon {
+        font-size: 3rem;
+    }
+
+    .juego-card h3 {
+        font-size: 1.2rem;
+    }
+
+    .juego-card p {
+        font-size: 0.9rem;
+    }
+
+    .modal-content {
+        padding: 30px 20px;
+        border-radius: 15px;
+        max-height: 70vh;
+    }
+
+    /* MENSAJE */
     .mensaje-box {
         padding: 30px 20px;
+        max-width: 100%;
+        border-radius: 15px;
     }
 
+    .mensaje-box h2 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+
+    .mensaje-texto {
+        font-size: 1rem;
+        line-height: 1.7;
+    }
+
+    .marck-script {
+        font-size: 1.05rem;
+    }
+
+    /* NAVBAR */
     .navbar {
-        bottom: 20px;
-        left: 20px;
-        right: 20px;
+        position: fixed;
+        bottom: 15px;
+        left: 10px;
+        right: 10px;
         transform: none;
+        padding: 12px 15px;
+        gap: 8px;
     }
 
+    .nav-btn {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+        border-radius: 20px;
+    }
+
+    /* MÚSICA */
     .music-toggle {
+        top: 20px;
+        right: 20px;
         width: 50px;
         height: 50px;
-        font-size: 1.5rem;
+        font-size: 1.4rem;
+    }
+
+    /* CONFETI */
+    .confetti {
+        font-size: 1rem;
     }
 }
 
-@media (max-width: 480px) {
+/* ============================================
+   RESPONSIVE - MÓVILES MEDIANOS (480px a 768px)
+   ============================================ */
+
+@media (max-width: 600px) {
     .section {
-        padding: 40px 15px;
+        padding: 30px 12px;
+        min-height: auto;
+    }
+
+    .section-title {
+        font-size: 1.7rem;
+        margin-bottom: 30px;
     }
 
     .titulo-inicio {
         font-size: 2rem;
+        margin-bottom: 10px;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+        margin-bottom: 30px;
+    }
+
+    /* COUNTDOWN */
+    .countdown-container {
+        margin-bottom: 30px;
+    }
+
+    .countdown-title {
+        font-size: 0.9rem;
+        margin-bottom: 12px;
+    }
+
+    .countdown {
+        gap: 3px;
+    }
+
+    .countdown-item {
+        min-width: 55px;
+        padding: 10px 8px;
+        border-radius: 10px;
+    }
+
+    .countdown-value {
+        font-size: 1.5rem;
+    }
+
+    .countdown-label {
+        font-size: 0.65rem;
+    }
+
+    .countdown-separator {
+        font-size: 1rem;
+        margin: 0 2px;
+    }
+
+    .btn-start {
+        padding: 12px 25px;
+        font-size: 0.95rem;
+        border-radius: 45px;
+    }
+
+    /* GALERÍA */
+    .carousel-3d {
+        height: 280px;
+    }
+
+    .galeria-container {
+        max-width: 100%;
+    }
+
+    .carousel-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
+        min-height: 40px;
+        min-width: 40px;
+    }
+
+    .photo-counter {
+        font-size: 0.95rem;
+        margin-top: 15px;
+    }
+
+    /* TIMELINE */
+    .timeline-item {
+        margin-bottom: 35px;
+    }
+
+    .timeline-marker {
+        left: 12px;
+    }
+
+    .timeline-item:nth-child(odd),
+    .timeline-item:nth-child(even) {
+        padding-left: 45px;
+    }
+
+    .timeline-content {
+        padding: 15px;
+    }
+
+    .timeline-content h3 {
+        font-size: 1.1rem;
+        margin-bottom: 8px;
+    }
+
+    .timeline-date {
+        font-size: 0.8rem;
+    }
+
+    .timeline-description {
+        font-size: 0.85rem;
+    }
+
+    /* JUEGOS */
+    .juegos-container {
+        gap: 15px;
+    }
+
+    .juego-card {
+        padding: 20px;
+    }
+
+    .juego-icon {
+        font-size: 2.8rem;
+        margin-bottom: 15px;
+    }
+
+    .juego-card h3 {
+        font-size: 1.1rem;
+    }
+
+    .juego-card p {
+        font-size: 0.85rem;
+    }
+
+    .modal-content {
+        padding: 25px 15px;
+        max-height: 80vh;
+        max-width: 95%;
+    }
+
+    .close-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 1.3rem;
+    }
+
+    /* MENSAJE */
+    .mensaje-box {
+        padding: 25px 15px;
+        border-radius: 15px;
+        max-width: 100%;
+    }
+
+    .mensaje-box h2 {
+        font-size: 1.7rem;
+        margin-bottom: 15px;
+    }
+
+    .mensaje-texto {
+        font-size: 0.95rem;
+        line-height: 1.6;
+        text-align: left;
+    }
+
+    .marck-script {
+        font-size: 1rem;
+    }
+
+    /* NAVBAR */
+    .navbar {
+        bottom: 12px;
+        left: 8px;
+        right: 8px;
+        padding: 10px 12px;
+        gap: 6px;
+        border-radius: 25px;
+    }
+
+    .nav-btn {
+        padding: 5px 10px;
+        font-size: 0.7rem;
+    }
+
+    /* MÚSICA */
+    .music-toggle {
+        top: 15px;
+        right: 15px;
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;
+    }
+}
+
+/* ============================================
+   RESPONSIVE - MÓVILES PEQUEÑOS (max-width: 480px)
+   ============================================ */
+
+@media (max-width: 480px) {
+    .section {
+        padding: 25px 10px;
+        min-height: auto;
     }
 
     .section-title {
         font-size: 1.5rem;
-        margin-bottom: 30px;
+        margin-bottom: 25px;
+    }
+
+    .titulo-inicio {
+        font-size: 1.8rem;
+        margin-bottom: 8px;
+    }
+
+    .subtitle {
+        font-size: 0.95rem;
+        margin-bottom: 25px;
+    }
+
+    /* COUNTDOWN */
+    .countdown-container {
+        margin-bottom: 25px;
+    }
+
+    .countdown-title {
+        font-size: 0.85rem;
+        margin-bottom: 10px;
+    }
+
+    .countdown {
+        gap: 2px;
     }
 
     .countdown-item {
-        min-width: 50px;
-        padding: 10px;
+        min-width: 48px;
+        padding: 8px 6px;
+        border-radius: 8px;
     }
 
     .countdown-value {
         font-size: 1.3rem;
     }
 
-    .carousel-item {
-        height: 300px;
+    .countdown-label {
+        font-size: 0.6rem;
     }
 
+    .countdown-separator {
+        font-size: 0.9rem;
+        margin: 0 1px;
+    }
+
+    .btn-start {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+        width: 90%;
+    }
+
+    /* GALERÍA */
+    .carousel-3d {
+        height: 240px;
+    }
+
+    .carousel-item {
+        border-radius: 12px;
+    }
+
+    .carousel-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+    }
+
+    .carousel-btn.prev {
+        left: 3px;
+    }
+
+    .carousel-btn.next {
+        right: 3px;
+    }
+
+    .photo-counter {
+        font-size: 0.9rem;
+        margin-top: 12px;
+    }
+
+    /* TIMELINE */
+    .timeline-container::before {
+        left: 10px;
+    }
+
+    .timeline-item {
+        margin-bottom: 30px;
+    }
+
+    .timeline-marker {
+        left: 10px;
+        width: 16px;
+        height: 16px;
+        border-width: 2px;
+    }
+
+    .timeline-item:hover .timeline-marker {
+        width: 24px;
+        height: 24px;
+        top: 18px;
+    }
+
+    .timeline-item:nth-child(odd),
+    .timeline-item:nth-child(even) {
+        padding-left: 42px;
+    }
+
+    .timeline-content {
+        padding: 12px;
+        border-radius: 10px;
+    }
+
+    .timeline-content h3 {
+        font-size: 1rem;
+        margin-bottom: 5px;
+    }
+
+    .timeline-date {
+        font-size: 0.75rem;
+        margin-bottom: 5px;
+    }
+
+    .timeline-description {
+        font-size: 0.8rem;
+    }
+
+    /* JUEGOS */
     .juegos-container {
         grid-template-columns: 1fr;
+        gap: 12px;
+        max-width: 100%;
+    }
+
+    .juego-card {
+        padding: 18px;
+        border-radius: 12px;
+    }
+
+    .juego-icon {
+        font-size: 2.5rem;
+        margin-bottom: 12px;
+    }
+
+    .juego-card h3 {
+        font-size: 1rem;
+        margin-bottom: 5px;
+    }
+
+    .juego-card p {
+        font-size: 0.8rem;
+    }
+
+    .modal-content {
+        padding: 20px 15px;
+        max-height: 85vh;
+        border-radius: 12px;
+    }
+
+    .close-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 1.2rem;
+        top: 15px;
+        right: 15px;
+    }
+
+    /* MENSAJE */
+    .mensaje-box {
+        padding: 20px 12px;
+        border-radius: 12px;
+        max-width: 100%;
+    }
+
+    .mensaje-box h2 {
+        font-size: 1.5rem;
+        margin-bottom: 12px;
+    }
+
+    .mensaje-texto {
+        font-size: 0.9rem;
+        line-height: 1.5;
+        text-align: left;
+    }
+
+    .marck-script {
+        font-size: 0.95rem;
+    }
+
+    /* NAVBAR */
+    .navbar {
+        bottom: 10px;
+        left: 5px;
+        right: 5px;
+        padding: 8px 10px;
+        gap: 4px;
+        border-radius: 20px;
+    }
+
+    .nav-btn {
+        padding: 4px 8px;
+        font-size: 0.65rem;
+        border-radius: 15px;
+    }
+
+    /* MÚSICA */
+    .music-toggle {
+        top: 12px;
+        right: 12px;
+        width: 42px;
+        height: 42px;
+        font-size: 1.1rem;
+    }
+
+    /* CONFETI */
+    .confetti {
+        font-size: 0.9rem;
     }
 }
 
+/* ============================================
+   RESPONSIVE - OPTIMIZACIÓN PARA ORIENTACIÓN
+   ============================================ */
+
+@media (orientation: landscape) and (max-height: 600px) {
+    .section {
+        min-height: auto;
+        padding: 20px 10px;
+    }
+
+    .titulo-inicio {
+        font-size: 1.8rem;
+        margin-bottom: 5px;
+    }
+
+    .subtitle {
+        font-size: 0.85rem;
+        margin-bottom: 15px;
+    }
+
+    .countdown-item {
+        padding: 8px;
+    }
+
+    .countdown-value {
+        font-size: 1.2rem;
+    }
+
+    .btn-start {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+
+    .carousel-3d {
+        height: 250px;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+    }
+
+    .timeline-item {
+        margin-bottom: 20px;
+    }
+
+    .timeline-content {
+        padding: 12px;
+    }
+
+    .juego-card {
+        padding: 15px;
+    }
+
+    .navbar {
+        bottom: 8px;
+        padding: 8px 10px;
+    }
+}
+
+/* ============================================
+   RESPONSIVE - TABLET EN HORIZONTAL (1024px+)
+   ============================================ */
+
+@media (orientation: landscape) and (min-height: 600px) and (max-width: 1024px) {
+    .section {
+        min-height: 100vh;
+        padding: 40px 20px;
+    }
+
+    .carousel-3d {
+        height: 400px;
+    }
 }
 
 
