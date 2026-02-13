@@ -576,6 +576,7 @@ body {
     z-index: 500;
     flex-wrap: wrap;
     justify-content: center;
+    max-width: 90vw;
 }
 
 .nav-btn {
@@ -1006,6 +1007,9 @@ body {
         transform: none;
         padding: 12px 15px;
         gap: 8px;
+        max-width: calc(100% - 20px);
+        justify-content: flex-start;
+        overflow-x: auto;
     }
 
     .nav-btn {
@@ -1207,14 +1211,19 @@ body {
         bottom: 12px;
         left: 8px;
         right: 8px;
+        transform: none;
         padding: 10px 12px;
         gap: 6px;
         border-radius: 25px;
+        max-width: calc(100% - 16px);
+        max-height: 50px;
+        overflow-y: hidden;
     }
 
     .nav-btn {
         padding: 5px 10px;
         font-size: 0.7rem;
+        white-space: nowrap;
     }
 
     /* MÚSICA */
@@ -1432,15 +1441,21 @@ body {
         bottom: 10px;
         left: 5px;
         right: 5px;
+        transform: none;
         padding: 8px 10px;
         gap: 4px;
         border-radius: 20px;
+        max-width: calc(100% - 10px);
+        max-height: 42px;
+        overflow-y: hidden;
     }
 
     .nav-btn {
         padding: 4px 8px;
         font-size: 0.65rem;
         border-radius: 15px;
+        flex-shrink: 0;
+        white-space: nowrap;
     }
 
     /* MÚSICA */
