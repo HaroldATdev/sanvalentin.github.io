@@ -183,13 +183,13 @@ body {
 .galeria-container {
     position: relative;
     width: 100%;
-    max-width: 600px;
+    max-width: 350px;
     margin: 0 auto;
 }
 
 .carousel-3d {
     perspective: 1000px;
-    height: 400px;
+    height: 600px;
     position: relative;
 }
 
@@ -788,11 +788,11 @@ body {
     }
 
     .carousel-3d {
-        height: 350px;
+        height: 500px;
     }
 
     .galeria-container {
-        max-width: 500px;
+        max-width: 350px;
     }
 
     .mensaje-box {
@@ -871,7 +871,7 @@ body {
 
     /* GALERÍA */
     .carousel-3d {
-        height: 320px;
+        height: 450px;
     }
 
     .carousel-item {
@@ -1107,7 +1107,7 @@ body {
 
     /* GALERÍA */
     .carousel-3d {
-        height: 250px;
+        height: 380px;
     }
 
     .galeria-container {
@@ -1312,7 +1312,7 @@ body {
 
     /* GALERÍA */
     .carousel-3d {
-        height: 240px;
+        height: 380px;
     }
 
     .carousel-item {
@@ -1516,7 +1516,7 @@ body {
     }
 
     .carousel-3d {
-        height: 250px;
+        height: 300px;
     }
 
     .section-title {
@@ -1597,7 +1597,7 @@ body {
     }
 
     .carousel-3d {
-        height: 200px;
+        height: 300px;
     }
 
     .carousel-btn {

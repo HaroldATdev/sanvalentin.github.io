@@ -98,7 +98,7 @@ function initGallery() {
         if (media.type === 'image') {
             html = `<img src="${media.src}" alt="${media.alt}" style="width: 100%; height: 100%; object-fit: cover;">`;
         } else if (media.type === 'video') {
-            html = `<video style="width: 100%; height: 100%; object-fit: contain; background: #000;" controls>
+            html = `<video style="width: 100%; height: 100%; object-fit: contain; background: #000; transform: rotate(-90deg);" autoplay muted>
                 <source src="${media.src}" type="video/mp4">
                 Tu navegador no soporta videos
             </video>`;
@@ -124,6 +124,10 @@ function previousPhoto() {
     const items = document.querySelectorAll('.carousel-item');
     const total = items.length;
 
+    // Pausar video actual
+    const currentVideo = items[currentPhotoIndex].querySelector('video');
+    if (currentVideo) currentVideo.pause();
+
     // Remover clases
     items.forEach(item => item.classList.remove('active', 'prev'));
 
@@ -136,12 +140,23 @@ function previousPhoto() {
     items[currentPhotoIndex].classList.add('active');
     items[prevIndex].classList.add('prev');
 
+    // Reproducir nuevo video
+    const newVideo = items[currentPhotoIndex].querySelector('video');
+    if (newVideo) {
+        newVideo.currentTime = 0;
+        newVideo.play();
+    }
+
     document.getElementById('currentPhoto').textContent = currentPhotoIndex + 1;
 }
 
 function nextPhoto() {
     const items = document.querySelectorAll('.carousel-item');
     const total = items.length;
+
+    // Pausar video actual
+    const currentVideo = items[currentPhotoIndex].querySelector('video');
+    if (currentVideo) currentVideo.pause();
 
     // Remover clases
     items.forEach(item => item.classList.remove('active', 'prev'));
@@ -152,6 +167,13 @@ function nextPhoto() {
 
     items[currentPhotoIndex].classList.add('active');
     items[prevIndex].classList.add('prev');
+
+    // Reproducir nuevo video
+    const newVideo = items[currentPhotoIndex].querySelector('video');
+    if (newVideo) {
+        newVideo.currentTime = 0;
+        newVideo.play();
+    }
 
     document.getElementById('currentPhoto').textContent = currentPhotoIndex + 1;
 }
