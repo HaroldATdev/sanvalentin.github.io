@@ -562,31 +562,37 @@ body {
     background: rgba(255,255,255,0.1);
     backdrop-filter: blur(10px);
     border: 2px solid rgba(255,255,255,0.2);
-    padding: 8px 10px;
+    padding: 6px 8px;
     border-radius: 15px;
     display: flex;
-    gap: 6px;
+    gap: 4px;
     z-index: 500;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
     max-width: calc(100% - 10px);
-    max-height: 50px;
-    overflow-y: hidden;
+    max-height: 45px;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+}
+
+.navbar::-webkit-scrollbar {
+    display: none;
 }
 
 .nav-btn {
     background: rgba(255,255,255,0.2);
     color: white;
     border: 1px solid rgba(255,255,255,0.3);
-    padding: 6px 12px;
-    border-radius: 15px;
+    padding: 5px 10px;
+    border-radius: 12px;
     cursor: pointer;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: 600;
     transition: all 0.3s ease;
     -webkit-tap-highlight-color: transparent;
-    min-height: 32px;
-    min-width: 50px;
+    min-height: 30px;
+    min-width: 45px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -600,6 +606,7 @@ body {
 }
 
 .nav-btn:active {
+    background: rgba(255,255,255,0.5);
     transform: translateY(0);
 }
 
@@ -998,15 +1005,21 @@ body {
     /* NAVBAR */
     .navbar {
         position: fixed;
-        bottom: 15px;
-        left: 10px;
-        right: 10px;
+        bottom: 12px;
+        left: 8px;
+        right: 8px;
         transform: none;
-        padding: 12px 15px;
-        gap: 8px;
-        max-width: calc(100% - 20px);
-        justify-content: flex-start;
+        padding: 8px 10px;
+        gap: 5px;
+        max-width: calc(100% - 16px);
         overflow-x: auto;
+        justify-content: flex-start;
+    }
+
+    .nav-btn {
+        padding: 5px 10px;
+        font-size: 0.7rem;
+        min-width: 45px;
     }
 
     .nav-btn {
@@ -1207,22 +1220,23 @@ body {
 
     /* NAVBAR */
     .navbar {
-        bottom: 12px;
-        left: 8px;
-        right: 8px;
+        bottom: 10px;
+        left: 6px;
+        right: 6px;
         transform: none;
-        padding: 10px 12px;
-        gap: 6px;
-        border-radius: 25px;
-        max-width: calc(100% - 16px);
-        max-height: 50px;
-        overflow-y: hidden;
+        padding: 6px 8px;
+        gap: 4px;
+        border-radius: 12px;
+        max-width: calc(100% - 12px);
+        overflow-x: auto;
     }
 
     .nav-btn {
-        padding: 5px 10px;
-        font-size: 0.7rem;
-        white-space: nowrap;
+        padding: 4px 8px;
+        font-size: 0.65rem;
+        min-width: 42px;
+        min-height: 28px;
+        border-radius: 10px;
     }
 
     /* MÚSICA */
@@ -1437,24 +1451,24 @@ body {
 
     /* NAVBAR */
     .navbar {
-        bottom: 10px;
+        bottom: 8px;
         left: 5px;
         right: 5px;
         transform: none;
-        padding: 8px 10px;
-        gap: 4px;
-        border-radius: 20px;
+        padding: 5px 6px;
+        gap: 3px;
+        border-radius: 10px;
         max-width: calc(100% - 10px);
-        max-height: 42px;
-        overflow-y: hidden;
+        overflow-x: auto;
     }
 
     .nav-btn {
         padding: 4px 8px;
-        font-size: 0.65rem;
-        border-radius: 15px;
+        font-size: 0.6rem;
+        min-width: 40px;
+        min-height: 28px;
+        border-radius: 8px;
         flex-shrink: 0;
-        white-space: nowrap;
     }
 
     /* MÚSICA */
