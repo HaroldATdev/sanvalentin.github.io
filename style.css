@@ -27,7 +27,9 @@ body {
 /* ============================================
    SECCIONES GENERALES
    ============================================ */
-
+.swal2-actions{
+    padding: 2px;
+}
 .section {
     min-height: 100vh;
     display: flex;
@@ -35,6 +37,20 @@ body {
     justify-content: center;
     padding: 60px 20px 100px 20px;
     scroll-snap-align: start;
+    position: relative;
+}
+
+/* Ocultar secciones inicialmente */
+#galeria,
+#timeline,
+#juegos,
+#mensaje {
+    display: none;
+}
+
+.section.revealed {
+    display: flex !important;
+    animation: fadeInUp 0.8s ease-out;
 }
 
 .section-title {
@@ -177,6 +193,76 @@ body {
 }
 
 /* ============================================
+   PREGUNTA VALENTINE
+   ============================================ */
+
+.valentine-question {
+    text-align: center;
+    animation: fadeInUp 1s ease-out 0.6s both;
+}
+
+.valentine-question h2 {
+    font-size: 2.5rem;
+    color: white;
+    margin-bottom: 40px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    font-weight: 700;
+}
+
+.valentine-buttons {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-si {
+    background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
+    color: white;
+    border: none;
+    padding: 18px 50px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    -webkit-tap-highlight-color: transparent;
+    min-height: 60px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-si:hover {
+    transform: scale(1.1);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+}
+
+.btn-si:active {
+    transform: scale(1.05);
+}
+
+.btn-no {
+    background: rgba(255,255,255,0.3);
+    color: white;
+    border: 2px solid white;
+    padding: 18px 50px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    border-radius: 50px;
+    cursor: default;
+    transition: all 0.2s ease;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    -webkit-tap-highlight-color: transparent;
+    min-height: 60px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+/* ============================================
    SECCIÓN 2: GALERÍA 3D
    ============================================ */
 
@@ -216,18 +302,21 @@ body {
     box-shadow: 0 20px 60px rgba(0,0,0,0.3);
     opacity: 0;
     transform: translateX(100%) rotateY(45deg) scale(0.5);
+    display: none;
 }
 
 .carousel-item.active {
     opacity: 1;
     transform: translateX(0) rotateY(0) scale(1);
     z-index: 10;
+    display: block;
 }
 
 .carousel-item.prev {
     opacity: 0.3;
     transform: translateX(-100%) rotateY(-45deg) scale(0.5);
     z-index: 5;
+    display: block;
 }
 
 .carousel-item img {
@@ -569,7 +658,7 @@ body {
     border: 2px solid rgba(255,255,255,0.2);
     padding: 8px 6px;
     border-radius: 15px;
-    display: flex;
+    display: none;
     gap: 3px;
     z-index: 500;
     flex-wrap: nowrap;
@@ -580,6 +669,10 @@ body {
     scroll-behavior: smooth;
     scrollbar-width: none;
     box-sizing: border-box;
+}
+
+.navbar.revealed {
+    display: flex !important;
 }
 
 .navbar::-webkit-scrollbar {
@@ -671,6 +764,41 @@ body {
     animation: fall 3s linear forwards;
 }
 
+.strawberry {
+    position: fixed;
+    pointer-events: none;
+    animation: fall 5s linear forwards;
+}
+
+.stickers-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+    display: block;
+}
+
+.sticker {
+    position: absolute;
+    pointer-events: none;
+    opacity: 0.9;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sticker img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    max-height: 200px;
+}
+
 /* ============================================
    ANIMACIONES
    ============================================ */
@@ -729,15 +857,6 @@ body {
     }
 }
 
-@keyframes float {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-20px);
-    }
-}
-
 @keyframes bob {
     0%, 100% {
         transform: translateY(0);
@@ -772,6 +891,25 @@ body {
         transform: translateY(100vh) rotate(360deg);
         opacity: 0;
     }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    25% {
+        transform: translateY(-20px) rotate(5deg);
+    }
+    50% {
+        transform: translateY(-40px) rotate(-5deg);
+    }
+    75% {
+        transform: translateY(-20px) rotate(5deg);
+    }
+}
+
+.sticker {
+    animation: float linear infinite;
 }
 
 /* ============================================
@@ -1451,6 +1589,7 @@ body {
     .modal-content {
         padding: 20px 15px;
         max-height: 85vh;
+        max-width: 90vw;
         border-radius: 12px;
     }
 

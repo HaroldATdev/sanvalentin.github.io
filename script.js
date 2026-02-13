@@ -5,6 +5,9 @@
 const valentinesDay = new Date('2026-02-14T00:00:00').getTime();
 let currentPhotoIndex = 0;
 let gameActive = false;
+let valentineAccepted = false;
+let noButtonClickCount = 0;
+let lastSwalTime = 0;
 
 // ARRAY DE MOMENTOS - SOPORTA IMÁGENES Y VIDEOS
 // ==========================================
@@ -56,6 +59,8 @@ document.addEventListener('DOMContentLoaded', function() {
     initCountdown();
     initGallery();
     initConfetti();
+    initStrawberry();
+    initSnoopy();
 });
 
 // ============================================
@@ -269,9 +274,32 @@ function loadParejasGame(container) {
         }
         .parejas-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
             gap: 10px;
             margin: 20px 0;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        @media (max-width: 768px) {
+            .memory-card {
+                font-size: 1.5rem;
+            }
+            .parejas-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
+                max-width: 300px;
+            }
+        }
+        @media (max-width: 480px) {
+            .memory-card {
+                font-size: 1.2rem;
+            }
+            .parejas-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 6px;
+                max-width: 250px;
+            }
         }
     `;
     document.head.appendChild(style);
@@ -344,6 +372,37 @@ function loadParejasGame(container) {
 
 // Juego 2: Trivia con SweetAlert
 function loadTriviaGame(container) {
+    // Agregar estilos responsive para trivia
+    const style = document.createElement('style');
+    style.textContent = `
+        .swal2-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+            margin-top: 25px;
+            align-items: center;
+        }
+        .swal2-confirm {
+            width: 90% !important;
+            max-width: 350px !important;
+            padding: 14px 20px !important;
+            font-size: 1rem !important;
+            white-space: normal !important;
+            height: auto !important;
+        }
+        @media (max-width: 480px) {
+            .swal2-confirm {
+                padding: 12px 15px !important;
+                font-size: 0.9rem !important;
+            }
+            .swal2-popup {
+                width: 90vw !important;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+
     const questions = [
         {
             q: '¿Cuál fue el día donde pasó todo?',
@@ -371,7 +430,7 @@ function loadTriviaGame(container) {
             
             Swal.fire({
                 title: 'Trivia del Amor ❓',
-                html: `<p style="font-size: 1.2rem; margin: 20px 0;">${q.q}</p>`,
+                html: `<p style="font-size: 1.2rem; margin: 30px 0; padding: 20px 0;">${q.q}</p>`,
                 icon: 'question',
                 showCancelButton: false,
                 allowOutsideClick: false,
@@ -381,16 +440,20 @@ function loadTriviaGame(container) {
                     const buttonsContainer = modal.querySelector('.swal2-actions');
                     if (buttonsContainer) {
                         buttonsContainer.innerHTML = '';
+                        buttonsContainer.style.cssText = 'display: flex; flex-direction: column; gap: 10px; width: 100%;';
                     }
                     
                     // Crear botones para cada opción
-                    const buttonsHTML = q.options.map((opt, i) => 
-                        `<button class="swal2-confirm swal2-styled" style="background: #f5576c; margin: 5px;" onclick="handleTriviaAnswer(${i}, ${q.correct}, ${currentQuestion}, ${questions.length})">${opt}</button>`
-                    ).join('');
-                    
-                    if (buttonsContainer) {
-                        buttonsContainer.innerHTML = buttonsHTML;
-                    }
+                    q.options.forEach((opt, i) => {
+                        const btn = document.createElement('button');
+                        btn.className = 'swal2-confirm swal2-styled';
+                        btn.style.cssText = 'background: #f5576c; margin: 0; width: 100%; padding: 12px 20px; border-radius: 8px; border: none; color: white; cursor: pointer; font-weight: 600;';
+                        btn.textContent = opt;
+                        btn.onclick = () => handleTriviaAnswer(i, q.correct, currentQuestion, questions.length);
+                        if (buttonsContainer) {
+                            buttonsContainer.appendChild(btn);
+                        }
+                    });
                 }
             });
         } else {
@@ -446,11 +509,36 @@ function loadTriviaGame(container) {
 function loadCorazonesGame(container) {
     let score = 0;
 
+    // Crear estilos para responsividad
+    const style = document.createElement('style');
+    style.textContent = `
+        #gameArea {
+            width: 100% !important;
+            height: 400px;
+            background: linear-gradient(135deg, #f093fb, #f5576c) !important;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+            cursor: crosshair;
+            margin: 10px 0;
+        }
+        @media (max-width: 768px) {
+            #gameArea {
+                height: 350px !important;
+            }
+        }
+        @media (max-width: 480px) {
+            #gameArea {
+                height: 300px !important;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+
     const html = `
         <h3>Recoge Corazones 💕</h3>
         <p id="heartScore" style="font-size: 1.2rem; margin: 15px 0;">Corazones recogidos: <strong>0</strong></p>
-        <div id="gameArea" style="width: 100%; height: 300px; background: linear-gradient(135deg, #f093fb, #f5576c); 
-            border-radius: 10px; position: relative; overflow: hidden; cursor: crosshair; margin: 10px 0;"></div>
+        <div id="gameArea"></div>
         <button onclick="closeGame()" 
             style="padding: 10px 20px; background: #f5576c; color: white; border: none; 
             border-radius: 8px; cursor: pointer; width: 100%; margin-top: 15px;">
@@ -575,6 +663,41 @@ function createConfetti() {
     setTimeout(() => confetti.remove(), 3000);
 }
 
+// ============================================
+// FRESAS CAYENDO
+// ============================================
+
+function initStrawberry() {
+    // Crear fresas inicial
+    for (let i = 0; i < 15; i++) {
+        setTimeout(() => createStrawberry(), i * 150);
+    }
+    
+    // Crear fresas continuamente cada cierto tiempo
+    setInterval(() => {
+        for (let i = 0; i < 3; i++) {
+            setTimeout(() => createStrawberry(), i * 200);
+        }
+    }, 4000);
+}
+
+function createStrawberry() {
+    const confettiContainer = document.querySelector('.confetti-container');
+    const strawberry = document.createElement('div');
+    strawberry.className = 'strawberry';
+    
+    strawberry.textContent = '🍓';
+    strawberry.style.cssText = `
+        left: ${Math.random() * 100}%;
+        animation-duration: ${3 + Math.random() * 2}s;
+        font-size: ${0.8 + Math.random() * 1.2}rem;
+    `;
+
+    confettiContainer.appendChild(strawberry);
+
+    setTimeout(() => strawberry.remove(), 5000);
+}
+
 // Lanzar confeti cuando hacen clic en botones
 document.addEventListener('click', function(e) {
     if (e.target.classList.contains('btn-start') || 
@@ -582,8 +705,74 @@ document.addEventListener('click', function(e) {
         for (let i = 0; i < 10; i++) {
             setTimeout(() => createConfetti(), i * 50);
         }
+        for (let i = 0; i < 8; i++) {
+            setTimeout(() => createStrawberry(), i * 75);
+        }
     }
 });
+
+// ============================================
+// STICKERS DE SNOOPY
+// ============================================
+
+const snoopyImages = [
+    'https://www.pngplay.com/wp-content/uploads/13/Snoopy-Transparent-PNG.png',
+    'https://www.pngkey.com/png/full/223-2237612_transparent-snoopy-png-snoopy-hug.png',
+    'https://pngimg.com/uploads/snoopy/snoopy_PNG66.png',
+    'https://pngimg.com/uploads/snoopy/snoopy_PNG26.png'
+];
+
+function initSnoopy() {
+    const sections = ['inicio', 'galeria', 'timeline', 'juegos', 'mensaje'];
+    sections.forEach(sectionId => {
+        const section = document.getElementById(sectionId);
+        const container = section.querySelector('.stickers-container');
+        
+        if (container) {
+            const numStickers = window.innerWidth > 768 ? 3 : 2;
+            for (let i = 0; i < numStickers; i++) {
+                createSnoopySticker(container);
+            }
+        }
+    });
+}
+
+function createSnoopySticker(container) {
+    const sticker = document.createElement('div');
+    sticker.className = 'sticker';
+    
+    const img = document.createElement('img');
+    img.src = snoopyImages[Math.floor(Math.random() * snoopyImages.length)];
+    img.alt = 'Snoopy';
+    
+    // Calcular posición aleatoria
+    const randomX = Math.random() * 80 + 10; // 10% a 90%
+    const randomY = Math.random() * 80 + 5;  // 5% a 85%
+    const randomSize = Math.random() * 60 + 50; // 50px a 110px
+    const randomDuration = Math.random() * 6 + 4; // 4s a 10s
+    const randomRotation = Math.random() * 15 - 7.5;
+    
+    sticker.style.cssText = `
+        left: ${randomX}%;
+        top: ${randomY}%;
+        width: ${randomSize}px;
+        height: auto;
+        animation-duration: ${randomDuration}s;
+        transform: rotate(${randomRotation}deg);
+    `;
+    
+    img.onload = function() {
+        img.style.display = 'block';
+    };
+    
+    img.onerror = function() {
+        // No mostrar nada si la imagen no carga
+        sticker.remove();
+    };
+    
+    sticker.appendChild(img);
+    container.appendChild(sticker);
+}
 
 // ============================================
 // SOPORTE PARA SWIPE EN GALERÍA (MÓVIL)
@@ -663,6 +852,23 @@ document.addEventListener('DOMContentLoaded', function() {
 // ============================================
 
 function scrollToSection(sectionId) {
+    // Bloquear navegación si no ha aceptado ser San Valentín
+    if (sectionId !== 'inicio' && !valentineAccepted) {
+        Swal.fire({
+            title: '¡Espera! 💕',
+            text: '¡Primero tienes que responder la pregunta! ¿Serás mi San Valentín?',
+            icon: 'question',
+            confirmButtonText: 'Ok',
+            confirmButtonColor: '#f5576c'
+        });
+        // Hacer scroll de vuelta a inicio
+        const element = document.getElementById('inicio');
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+        return;
+    }
+    
     // Si es galeria, desmuteamos el audio e intentamos reproducir
     if (sectionId === 'galeria') {
         const bgMusic = document.getElementById('bgMusic');
@@ -726,3 +932,137 @@ setInterval(() => {
         createConfetti();
     }
 }, 3000);
+
+// ============================================
+// FUNCIONES PARA LA PREGUNTA VALENTINE
+// ============================================
+
+function acceptValentine() {
+    valentineAccepted = true;
+    
+    // Lanzar confeti y fresas
+    for (let i = 0; i < 15; i++) {
+        setTimeout(() => createConfetti(), i * 50);
+    }
+    for (let i = 0; i < 12; i++) {
+        setTimeout(() => createStrawberry(), i * 60);
+    }
+    
+    // Ocultar la pregunta de Valentine
+    const valentineQuestion = document.querySelector('.valentine-question');
+    if (valentineQuestion) {
+        valentineQuestion.style.opacity = '0';
+        valentineQuestion.style.transform = 'scale(0.8)';
+        valentineQuestion.style.transition = 'all 0.5s ease';
+        setTimeout(() => {
+            valentineQuestion.style.display = 'none';
+        }, 500);
+    }
+    
+    // Mostrar todas las otras secciones
+    const sections = document.querySelectorAll('.section');
+    sections.forEach((section, index) => {
+        if (!section.classList.contains('inicio-section')) {
+            setTimeout(() => {
+                section.classList.add('revealed');
+            }, 100 + index * 100);
+        }
+    });
+    
+    // Mostrar la navbar
+    const navbar = document.querySelector('.navbar');
+    if (navbar) {
+        setTimeout(() => {
+            navbar.classList.add('revealed');
+        }, 300);
+    }
+    
+    // Activar música y desplazarse después de un tiempo
+    setTimeout(() => {
+        const bgMusic = document.getElementById('bgMusic');
+        if (bgMusic) {
+            bgMusic.muted = false;
+            if (bgMusic.paused) {
+                bgMusic.play().catch(() => {});
+            }
+            document.getElementById('musicIcon').textContent = '🔊';
+        }
+        
+        // Desplazarse a la galería
+        scrollToSection('galeria');
+    }, 1500);
+}
+
+function moveNoButton() {
+    const noBtn = document.getElementById('btnNo');
+    if (!noBtn) return;
+    
+    noButtonClickCount++;
+    
+    // Diferentes efectos según el intento
+    const effects = [
+        () => {
+            // Moverse a una posición aleatoria
+            const randomX = Math.random() * 200 - 100;
+            const randomY = Math.random() * 200 - 100;
+            noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+        },
+        () => {
+            // Hacerse más pequeño
+            const size = Math.max(10, 100 - noButtonClickCount * 8);
+            noBtn.style.fontSize = size + '%';
+            noBtn.style.padding = (18 - noButtonClickCount * 2) + 'px ' + (50 - noButtonClickCount * 5) + 'px';
+        },
+        () => {
+            // Girar
+            noBtn.style.transform = `rotate(${noButtonClickCount * 45}deg)`;
+        },
+        () => {
+            // Escala
+            const scale = Math.max(0.1, 1 - noButtonClickCount * 0.15);
+            noBtn.style.transform = `scale(${scale})`;
+        }
+    ];
+    
+    // Aplicar efecto aleatorio
+    effects[Math.floor(Math.random() * effects.length)]();
+    
+    // Solo mostrar Swal en desktop (no en touch)
+    const isTouchDevice = () => {
+        return (('ontouchstart' in window) ||
+                (navigator.maxTouchPoints > 0) ||
+                (navigator.msMaxTouchPoints > 0));
+    };
+    
+    // Si es dispositivo táctil, no mostrar Swal
+    if (isTouchDevice()) {
+        return;
+    }
+    
+    // Mostrar mensajes divertidos solo en desktop
+    const messages = [
+        '¡No! 😊',
+        '¡Inténtalo de nuevo!',
+        '¡Vamos! 💕',
+        '¡Es imposible hacer click aquí!',
+        '¿De verdad lo intentas? 😄',
+        '¡Dí que sí! ✨',
+        '¡No hay escape! 🐶'
+    ];
+    
+    // Solo mostrar Swal cada 2 segundos máximo
+    const now = Date.now();
+    if (noButtonClickCount % 2 === 0 && (now - lastSwalTime) > 2000) {
+        lastSwalTime = now;
+        Swal.fire({
+            title: messages[Math.floor(Math.random() * messages.length)],
+            icon: 'info',
+            timer: 1500,
+            showConfirmButton: false,
+            position: 'top',
+            didOpen: (modal) => {
+                modal.style.zIndex = 9999;
+            }
+        });
+    }
+}

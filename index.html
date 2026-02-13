@@ -15,8 +15,9 @@
     <!-- SECCIÓN 1: PANTALLA INICIAL CON CUENTA REGRESIVA -->
     <section id="inicio" class="section inicio-section">
         <div class="confetti-container"></div>
+        <div class="stickers-container"></div>
         <div class="content-wrapper">
-            <h1 class="titulo-inicio">¡Feliz Día, Mi Amor! 💕</h1>
+            <h1 class="titulo-inicio">¡Feliz Día, Mi Fresita! 🍓</h1>
             <p class="subtitle">Una experiencia especial para ti</p>
             
             <div class="countdown-container">
@@ -44,12 +45,19 @@
                 </div>
             </div>
 
-            <button class="btn-start" onclick="scrollToSection('galeria')">Comenzar la Aventura ➜</button>
+            <div class="valentine-question">
+                <h2>¿Quieres ser mi San Valentín?</h2>
+                <div class="valentine-buttons">
+                    <button class="btn-si" onclick="acceptValentine()">✨ Sí ✨</button>
+                    <button class="btn-no" id="btnNo" onmouseenter="moveNoButton()" onpointerenter="moveNoButton()" onclick="event.preventDefault(); moveNoButton();">No 😢</button>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- SECCIÓN 2: GALERÍA DE FOTOS CON CARRUSEL 3D -->
     <section id="galeria" class="section galeria-section">
+        <div class="stickers-container"></div>
         <h2 class="section-title">Nuestros Momentos Especiales</h2>
         <div class="galeria-container">
             <div class="carousel-3d">
@@ -67,6 +75,7 @@
 
     <!-- SECCIÓN 3: LÍNEA DE TIEMPO -->
     <section id="timeline" class="section timeline-section">
+        <div class="stickers-container"></div>
         <h2 class="section-title">Nuestro Viaje Juntos</h2>
         <div class="timeline-container">
             <div class="timeline-item" onclick="expandTimeline(this)">
@@ -109,6 +118,7 @@
 
     <!-- SECCIÓN 4: MINI JUEGOS -->
     <section id="juegos" class="section juegos-section">
+        <div class="stickers-container"></div>
         <h2 class="section-title">Juegos del Amor</h2>
         <div class="juegos-container">
             <div class="juego-card" onclick="startGame('parejas')">
@@ -141,6 +151,7 @@
 
     <!-- SECCIÓN 5: MENSAJE FINAL -->
     <section id="mensaje" class="section mensaje-section">
+        <div class="stickers-container"></div>
         <div class="mensaje-box">
             <h2>Un Mensaje Especial Para Ti</h2>
             <p class="mensaje-texto marck-script">
