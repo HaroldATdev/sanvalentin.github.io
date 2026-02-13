@@ -5,7 +5,6 @@
 const valentinesDay = new Date('2026-02-14T00:00:00').getTime();
 let currentPhotoIndex = 0;
 let gameActive = false;
-let audioInitialized = false;
 
 // ARRAY DE MOMENTOS - SOPORTA IMÁGENES Y VIDEOS
 // ==========================================
@@ -51,23 +50,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const bgMusic = document.getElementById('bgMusic');
     if (bgMusic) {
         bgMusic.volume = 0.4; // 40% de volumen
+        bgMusic.currentTime = 140; // Iniciar en 2:20 (140 segundos)
         
-        // Reproducir al primer clic del usuario
-        const playMusic = function() {
-            if (!audioInitialized) {
-                bgMusic.currentTime = 140; // Iniciar en 2:20 (140 segundos)
-                bgMusic.play().catch(err => {
-                    console.log('Error al reproducir audio:', err);
-                });
-                audioInitialized = true;
-                // Remover listeners después del primer clic
-                document.removeEventListener('click', playMusic);
-                document.removeEventListener('touchstart', playMusic);
-            }
-        };
-        
-        document.addEventListener('click', playMusic);
-        document.addEventListener('touchstart', playMusic);
+        // Reproducir automáticamente (silenciado)
+        bgMusic.play().catch(err => {
+            console.log('Error al reproducir audio:', err);
+        });
     }
     
     initCountdown();
@@ -544,16 +532,14 @@ function toggleMusic() {
     const audio = document.getElementById('bgMusic');
     const icon = document.getElementById('musicIcon');
 
-    if (musicPlaying) {
-        audio.pause();
-        icon.textContent = '🔇';
-        musicPlaying = false;
-    } else {
-        audio.play().catch(() => {
-            console.log('No se puede reproducir automáticamente. Intenta hacer clic nuevamente.');
-        });
+    if (audio.muted) {
+        audio.muted = false;
         icon.textContent = '🔊';
         musicPlaying = true;
+    } else {
+        audio.muted = true;
+        icon.textContent = '🔇';
+        musicPlaying = false;
     }
 }
 
