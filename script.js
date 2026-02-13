@@ -46,6 +46,15 @@ const photos = [
 
 // Inicializar cuando el DOM está listo
 document.addEventListener('DOMContentLoaded', function() {
+    // Configurar audio de fondo
+    const bgMusic = document.getElementById('bgMusic');
+    if (bgMusic) {
+        bgMusic.volume = 0.4; // 40% de volumen
+        bgMusic.addEventListener('loadedmetadata', function() {
+            bgMusic.currentTime = 140; // Iniciar en 2:20 (140 segundos)
+        });
+    }
+    
     initCountdown();
     initGallery();
     initConfetti();
@@ -339,19 +348,19 @@ function loadParejasGame(container) {
 function loadTriviaGame(container) {
     const questions = [
         {
-            q: '¿Cuántos cabezazos nos dimos el primer día? 😄',
-            options: ['Uno', 'Dos', 'Tres'],
-            correct: 0
+            q: '¿Cuál fue el día donde pasó todo?',
+            options: ['31 de enero', '30 de enero', '24 de enero'],
+            correct: 1
         },
         {
-            q: '¿Cuál es tu mayor cualidad? 💫',
-            options: ['Tu ternura', 'Tu fuerza', 'Tu magia'],
+            q: '¿Dónde fue nuestro primer beso? 💫',
+            options: ['Museo Metropolitano de Lima', 'Parque', 'MegaPlaza'],
             correct: 2
         },
         {
-            q: '¿Cuántos "te quiero" te he dicho hoy?',
-            options: ['1000+', 'infinitos', 'más que estrellas'],
-            correct: 1
+            q: 'Del 1 al 10 ¿Cuánto crees que me encantas?',
+            options: ['5', '10', '∞'],
+            correct: 2
         }
     ];
 
