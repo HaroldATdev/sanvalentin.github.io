@@ -1,0 +1,4 @@
+👉 Coloca aquí tus imágenes (.jpg, .png, .gif, .webp)
+
+Despues actualiza el array "photos" en script.js así:
+{ type: 'image', src: 'fotos/nombre-de-tu-foto.jpg', alt: 'Descripción' }

@@ -6,14 +6,40 @@ const valentinesDay = new Date('2026-02-14T00:00:00').getTime();
 let currentPhotoIndex = 0;
 let gameActive = false;
 
-// Array con fotografías placeholder (cambiar por tus fotos reales)
+// ARRAY DE MOMENTOS - SOPORTA IMÁGENES Y VIDEOS
+// ==========================================
+// FORMATO: { type: 'image' | 'video', src: 'URL', alt: 'descripción' }
+// 
+// EJEMPLOS DE USO:
+// 
+// 1. IMÁGENES LOCALES (en carpeta del proyecto):
+//    { type: 'image', src: 'fotos/foto1.jpg', alt: 'Mi foto' }
+//    { type: 'image', src: 'fotos/foto2.png', alt: 'Otra foto' }
+//
+// 2. IMÁGENES DE INTERNET (URLs completas):
+//    { type: 'image', src: 'https://ejemplo.com/foto.jpg', alt: 'Foto online' }
+//
+// 3. VIDEOS DESDE URL:
+//    { type: 'video', src: 'https://ejemplo.com/video.mp4', alt: 'Mi video' }
+//
+// 4. VIDEOS LOCALES:
+//    { type: 'video', src: 'videos/mi-video.mp4', alt: 'Video grabado' }
+//
+// 5. VIDEOS DE YOUTUBE (embed):
+//    { type: 'youtube', src: 'https://www.youtube.com/embed/ID_VIDEO', alt: 'Video YouTube' }
+//
+// ¿CÓMO AGREGAR TUS ARCHIVOS LOCALES?
+// 1. Crea carpetas en c:\xampp-8\htdocs\sanvalentin.github.io\fotos y \videos
+// 2. Sube tus archivos allí
+// 3. Usa las rutas relativas en el array
+//
 const photos = [
-    'https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=600&h=400&fit=crop',
-    'https://images.unsplash.com/photo-1516989126618-dc45a87c18c6?w=600&h=400&fit=crop',
-    'https://images.unsplash.com/photo-1513642200688-c52646db42da?w=600&h=400&fit=crop',
-    'https://images.unsplash.com/photo-1427751494785-cd51b57ec289?w=600&h=400&fit=crop',
-    'https://images.unsplash.com/photo-1518367150022-96b0ced48c4e?w=600&h=400&fit=crop',
-    'https://images.unsplash.com/photo-1514895221402-d7502aff88ea?w=600&h=400&fit=crop'
+    { type: 'image', src: 'https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=600&h=400&fit=crop', alt: 'Momento 1' },
+    { type: 'image', src: 'https://images.unsplash.com/photo-1516989126618-dc45a87c18c6?w=600&h=400&fit=crop', alt: 'Momento 2' },
+    { type: 'image', src: 'https://images.unsplash.com/photo-1513642200688-c52646db42da?w=600&h=400&fit=crop', alt: 'Momento 3' },
+    { type: 'image', src: 'https://images.unsplash.com/photo-1427751494785-cd51b57ec289?w=600&h=400&fit=crop', alt: 'Momento 4' },
+    { type: 'image', src: 'https://images.unsplash.com/photo-1518367150022-96b0ced48c4e?w=600&h=400&fit=crop', alt: 'Momento 5' },
+    { type: 'image', src: 'https://images.unsplash.com/photo-1514895221402-d7502aff88ea?w=600&h=400&fit=crop', alt: 'Momento 6' }
 ];
 
 // ============================================
@@ -64,11 +90,27 @@ function initGallery() {
     const carouselTrack = document.getElementById('carouselTrack');
     const totalPhotos = photos.length;
     
-    // Crear elementos de foto
-    photos.forEach((photo, index) => {
+    // Crear elementos de foto/video
+    photos.forEach((media, index) => {
         const item = document.createElement('div');
         item.className = 'carousel-item';
-        item.innerHTML = `<img src="${photo}" alt="Momento ${index + 1}">`;
+        
+        let html = '';
+        
+        if (media.type === 'image') {
+            html = `<img src="${media.src}" alt="${media.alt}" style="width: 100%; height: 100%; object-fit: cover;">`;
+        } else if (media.type === 'video') {
+            html = `<video style="width: 100%; height: 100%; object-fit: cover;" controls>
+                <source src="${media.src}" type="video/mp4">
+                Tu navegador no soporta videos
+            </video>`;
+        } else if (media.type === 'youtube') {
+            html = `<iframe style="width: 100%; height: 100%; border: none;" 
+                src="${media.src}" 
+                allowfullscreen></iframe>`;
+        }
+        
+        item.innerHTML = html;
         
         if (index === 0) {
             item.classList.add('active');

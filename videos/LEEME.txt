@@ -1,0 +1,4 @@
+👉 Coloca aquí tus videos (.mp4, .webm)
+
+Despues actualiza el array "photos" en script.js así:
+{ type: 'video', src: 'videos/nombre-de-tu-video.mp4', alt: 'Descripción' }
