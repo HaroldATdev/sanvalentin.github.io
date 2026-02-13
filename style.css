@@ -562,16 +562,16 @@ body {
     background: rgba(255,255,255,0.1);
     backdrop-filter: blur(10px);
     border: 2px solid rgba(255,255,255,0.2);
-    padding: 6px 8px;
+    padding: 8px 6px;
     border-radius: 15px;
     display: flex;
-    gap: 4px;
+    gap: 3px;
     z-index: 500;
     flex-wrap: nowrap;
     justify-content: flex-start;
     overflow-x: auto;
     width: auto;
-    max-height: 45px;
+    max-height: 50px;
     scroll-behavior: smooth;
     scrollbar-width: none;
     box-sizing: border-box;
@@ -585,15 +585,15 @@ body {
     background: rgba(255,255,255,0.2);
     color: white;
     border: 1px solid rgba(255,255,255,0.3);
-    padding: 5px 10px;
+    padding: 6px 11px;
     border-radius: 12px;
     cursor: pointer;
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     font-weight: 600;
     transition: all 0.3s ease;
     -webkit-tap-highlight-color: transparent;
-    min-height: 30px;
-    min-width: 45px;
+    min-height: 34px;
+    min-width: 50px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -1019,15 +1019,11 @@ body {
     }
 
     .nav-btn {
-        padding: 5px 10px;
-        font-size: 0.7rem;
-        min-width: 45px;
-    }
-
-    .nav-btn {
         padding: 6px 12px;
         font-size: 0.8rem;
-        border-radius: 20px;
+        min-width: 50px;
+        min-height: 36px;
+        border-radius: 12px;
     }
 
     /* MÚSICA */
@@ -1226,7 +1222,7 @@ body {
         left: 6px;
         right: 6px;
         transform: none;
-        padding: 6px 8px;
+        padding: 7px 8px;
         gap: 4px;
         border-radius: 12px;
         width: auto;
@@ -1235,10 +1231,10 @@ body {
     }
 
     .nav-btn {
-        padding: 4px 8px;
-        font-size: 0.65rem;
-        min-width: 42px;
-        min-height: 28px;
+        padding: 5px 10px;
+        font-size: 0.75rem;
+        min-width: 48px;
+        min-height: 32px;
         border-radius: 10px;
     }
 
@@ -1458,7 +1454,7 @@ body {
         left: 5px;
         right: 5px;
         transform: none;
-        padding: 5px 6px;
+        padding: 6px 6px;
         gap: 3px;
         border-radius: 10px;
         width: auto;
@@ -1467,12 +1463,11 @@ body {
     }
 
     .nav-btn {
-        padding: 4px 8px;
-        font-size: 0.6rem;
-        min-width: 40px;
-        min-height: 28px;
+        padding: 5px 9px;
+        font-size: 0.72rem;
+        min-width: 46px;
+        min-height: 30px;
         border-radius: 8px;
-        flex-shrink: 0;
     }
 
     /* MÚSICA */
