@@ -35,12 +35,12 @@ let gameActive = false;
 //
 const photos = [
     { type: 'image', src: 'https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=600&h=400&fit=crop', alt: 'Momento 1' },
-    { type: 'video', src: 'videos/WhatsApp Video 2026-02-13 at 4.51.16 AM.mp4', alt: 'Video 1' },
-    { type: 'video', src: 'videos/WhatsApp Video 2026-02-13 at 4.51.16 AM (1).mp4', alt: 'Video 2' },
+    { type: 'video', src: 'videos/VID-20260206-WA0023.mp4', alt: 'Video 1' },
+    { type: 'video', src: 'videos/VID-20260206-WA0024.mp4', alt: 'Video 2' },
     { type: 'image', src: 'https://images.unsplash.com/photo-1516989126618-dc45a87c18c6?w=600&h=400&fit=crop', alt: 'Momento 2' },
-    { type: 'video', src: 'videos/WhatsApp Video 2026-02-13 at 4.51.19 AM.mp4', alt: 'Video 3' },
+    { type: 'video', src: 'videos/VID-20260206-WA0025.mp4', alt: 'Video 3' },
     { type: 'image', src: 'https://images.unsplash.com/photo-1513642200688-c52646db42da?w=600&h=400&fit=crop', alt: 'Momento 3' },
-    { type: 'video', src: 'videos/WhatsApp Video 2026-02-13 at 4.51.20 AM.mp4', alt: 'Video 4' },
+    { type: 'video', src: 'videos/VID-20260206-WA0026.mp4', alt: 'Video 4' },
     { type: 'image', src: 'https://images.unsplash.com/photo-1427751494785-cd51b57ec289?w=600&h=400&fit=crop', alt: 'Momento 4' }
 ];
 
