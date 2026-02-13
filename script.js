@@ -56,9 +56,16 @@ document.addEventListener('DOMContentLoaded', function() {
         // Reproducir al primer clic del usuario
         const playMusic = function() {
             if (!audioInitialized) {
-                bgMusic.play().catch(err => {
-                    console.log('Error al reproducir audio:', err);
-                });
+                try {
+                    const playPromise = bgMusic.play();
+                    if (playPromise !== undefined) {
+                        playPromise.catch(err => {
+                            console.log('Audio no pudo reproducirse (espera interacción)');
+                        });
+                    }
+                } catch (err) {
+                    console.log('No se puede reproducir aún');
+                }
                 audioInitialized = true;
                 document.removeEventListener('click', playMusic);
                 document.removeEventListener('touchstart', playMusic);
