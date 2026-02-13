@@ -1049,7 +1049,12 @@ body {
    RESPONSIVE - MÓVILES MEDIANOS (480px a 768px)
    ============================================ */
 
+/* RESPONSIVE - MÓVILES (max-width: 600px) */
 @media (max-width: 600px) {
+    .navbar {
+        display: none;
+    }
+
     .section {
         padding: 25px 10px 90px 10px;
         min-height: auto;
@@ -1259,7 +1264,12 @@ body {
    RESPONSIVE - MÓVILES PEQUEÑOS (max-width: 480px)
    ============================================ */
 
+/* RESPONSIVE - MÓVILES PEQUEÑOS (max-width: 480px) */
 @media (max-width: 480px) {
+    .navbar {
+        display: none;
+    }
+
     .section {
         padding: 20px 8px 85px 8px;
         min-height: auto;
@@ -1559,7 +1569,12 @@ body {
    RESPONSIVE - MÓVILES MUY PEQUEÑOS (max-width: 360px)
    ============================================ */
 
+/* RESPONSIVE - MÓVILES MUY PEQUEÑOS (max-width: 360px) */
 @media (max-width: 360px) {
+    .navbar {
+        display: none;
+    }
+
     .section {
         padding: 15px 6px 85px 6px;
     }

@@ -673,6 +673,15 @@ document.addEventListener('DOMContentLoaded', function() {
 // ============================================
 
 function scrollToSection(sectionId) {
+    // Si es galeria, desmuteamos el audio
+    if (sectionId === 'galeria') {
+        const bgMusic = document.getElementById('bgMusic');
+        if (bgMusic) {
+            bgMusic.muted = false;
+            document.getElementById('musicIcon').textContent = '🔊';
+        }
+    }
+    
     const element = document.getElementById(sectionId);
     if (element) {
         const targetPosition = element.offsetTop;
