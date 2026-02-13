@@ -102,7 +102,6 @@ function initGallery() {
         if (media.type === 'image') {
             html = `<img src="${media.src}" alt="${media.alt}" style="width: 100%; height: 100%; object-fit: cover;">`;
         } else if (media.type === 'video') {
-            item.classList.add('video-item');
             html = `<video style="width: 100%; height: 100%; object-fit: cover;" controls>
                 <source src="${media.src}" type="video/mp4">
                 Tu navegador no soporta videos
