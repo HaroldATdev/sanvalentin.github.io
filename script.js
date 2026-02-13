@@ -5,7 +5,6 @@
 const valentinesDay = new Date('2026-02-14T00:00:00').getTime();
 let currentPhotoIndex = 0;
 let gameActive = false;
-let audioInitialized = false;
 
 // ARRAY DE MOMENTOS - SOPORTA IMÁGENES Y VIDEOS
 // ==========================================
@@ -52,28 +51,6 @@ document.addEventListener('DOMContentLoaded', function() {
     if (bgMusic) {
         bgMusic.volume = 0.2; // 40% de volumen
         bgMusic.currentTime = 150; // Iniciar en 2:30 (150 segundos)
-        
-        // Reproducir al primer clic del usuario
-        const playMusic = function() {
-            if (!audioInitialized) {
-                try {
-                    const playPromise = bgMusic.play();
-                    if (playPromise !== undefined) {
-                        playPromise.catch(err => {
-                            console.log('Audio no pudo reproducirse (espera interacción)');
-                        });
-                    }
-                } catch (err) {
-                    console.log('No se puede reproducir aún');
-                }
-                audioInitialized = true;
-                document.removeEventListener('click', playMusic);
-                document.removeEventListener('touchstart', playMusic);
-            }
-        };
-        
-        document.addEventListener('click', playMusic);
-        document.addEventListener('touchstart', playMusic);
     }
     
     initCountdown();
@@ -554,6 +531,12 @@ function toggleMusic() {
         audio.muted = false;
         icon.textContent = '🔊';
         musicPlaying = true;
+        // Intentar reproducir si está pausado
+        if (audio.paused) {
+            audio.play().catch(() => {
+                // Silent catch
+            });
+        }
     } else {
         audio.muted = true;
         icon.textContent = '🔇';
@@ -680,11 +663,17 @@ document.addEventListener('DOMContentLoaded', function() {
 // ============================================
 
 function scrollToSection(sectionId) {
-    // Si es galeria, desmuteamos el audio
+    // Si es galeria, desmuteamos el audio e intentamos reproducir
     if (sectionId === 'galeria') {
         const bgMusic = document.getElementById('bgMusic');
         if (bgMusic) {
             bgMusic.muted = false;
+            // Intentar reproducir solo si no está ya reproduciendo
+            if (bgMusic.paused) {
+                bgMusic.play().catch(() => {
+                    // Silent catch - el audio se reproducirá cuando sea posible
+                });
+            }
             document.getElementById('musicIcon').textContent = '🔊';
         }
     }
