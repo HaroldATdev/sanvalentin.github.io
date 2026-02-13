@@ -166,26 +166,13 @@ function closeGame() {
 }
 
 // Juego 1: Parejas Románticas
+// Juego 1: Parejas Románticas
 function loadParejasGame(container) {
     const emojis = ['❤️', '💕', '💑', '🌹', '💍', '👩‍❤️‍👨'];
     const cards = [...emojis, ...emojis].sort(() => Math.random() - 0.5);
     let flipped = [];
     let matched = 0;
-
-    const html = `
-        <h3>Parejas Románticas 🎴</h3>
-        <p>Encuentra las parejas de emojis</p>
-        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 20px 0;">
-            ${cards.map((emoji, i) => `
-                <button class="memory-card" onclick="flipCard(this, '${emoji}', ${i})">
-                    <span style="font-size: 2rem;">?</span>
-                </button>
-            `).join('')}
-        </div>
-        <div id="gameStatus">Aciertos: ${matched}/${emojis.length}</div>
-    `;
-
-    container.innerHTML = html;
+    let lockBoard = false;
 
     // Agregar estilos específicos del juego
     const style = document.createElement('style');
@@ -200,6 +187,9 @@ function loadParejasGame(container) {
             cursor: pointer;
             transition: all 0.3s;
             font-size: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .memory-card:hover {
             transform: scale(1.05);
@@ -208,11 +198,82 @@ function loadParejasGame(container) {
             background: white;
             color: #333;
         }
+        .parejas-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
     `;
     document.head.appendChild(style);
+
+    const html = `
+        <h3>Parejas Románticas 🎴</h3>
+        <p>Encuentra las parejas de emojis</p>
+        <div id="matchStatus" style="margin: 15px 0; font-size: 1.1rem;">Aciertos: <strong id="matchCount">0</strong>/${emojis.length}</div>
+        <div class="parejas-grid" id="gameGrid"></div>
+    `;
+
+    container.innerHTML = html;
+
+    const gameGrid = container.querySelector('#gameGrid');
+    const matchCountEl = container.querySelector('#matchCount');
+
+    // Crear tarjetas
+    cards.forEach((emoji, index) => {
+        const card = document.createElement('button');
+        card.className = 'memory-card';
+        card.setAttribute('data-emoji', emoji);
+        card.setAttribute('data-index', index);
+        card.innerHTML = '<span>?</span>';
+        
+        card.addEventListener('click', function() {
+            if (lockBoard || card.classList.contains('flipped')) return;
+
+            const cardEmoji = card.getAttribute('data-emoji');
+            card.classList.add('flipped');
+            card.querySelector('span').textContent = cardEmoji;
+            flipped.push({ el: card, emoji: cardEmoji });
+
+            if (flipped.length === 2) {
+                lockBoard = true;
+                if (flipped[0].emoji === flipped[1].emoji) {
+                    matched++;
+                    matchCountEl.textContent = matched;
+                    flipped = [];
+                    lockBoard = false;
+
+                    if (matched === emojis.length) {
+                        setTimeout(() => {
+                            Swal.fire({
+                                title: '¡Ganaste! 🎉',
+                                text: 'Encontraste todas las parejas',
+                                icon: 'success',
+                                confirmButtonColor: '#f5576c',
+                                confirmButtonText: 'Cerrar'
+                            }).then(() => {
+                                closeGame();
+                            });
+                        }, 500);
+                    }
+                } else {
+                    setTimeout(() => {
+                        flipped[0].el.classList.remove('flipped');
+                        flipped[0].el.querySelector('span').textContent = '?';
+                        flipped[1].el.classList.remove('flipped');
+                        flipped[1].el.querySelector('span').textContent = '?';
+                        flipped = [];
+                        lockBoard = false;
+                    }, 600);
+                }
+            }
+        });
+        
+        gameGrid.appendChild(card);
+    });
 }
 
-// Juego 2: Trivia
+// Juego 2: Trivia con SweetAlert
 function loadTriviaGame(container) {
     const questions = [
         {
@@ -236,75 +297,89 @@ function loadTriviaGame(container) {
     let score = 0;
 
     function showQuestion() {
-        const q = questions[currentQuestion];
-        const html = `
-            <h3>Trivia del Amor ❓</h3>
-            <p style="font-size: 1.2rem; margin: 20px 0; color: #333;">${q.q}</p>
-            <div style="display: flex; flex-direction: column; gap: 10px;">
-                ${q.options.map((opt, i) => `
-                    <button onclick="selectAnswer(${i}, ${q.correct})" 
-                        style="padding: 12px; border: 2px solid #f5576c; background: white; 
-                        border-radius: 8px; cursor: pointer; transition: all 0.3s;"
-                        onmouseover="this.style.background='#f5576c'; this.style.color='white';"
-                        onmouseout="this.style.background='white'; this.style.color='#333';">
-                        ${opt}
-                    </button>
-                `).join('')}
-            </div>
-            <p style="margin-top: 20px; color: #666;">Pregunta ${currentQuestion + 1}/${questions.length}</p>
-        `;
-        container.innerHTML = html;
+        if (currentQuestion < questions.length) {
+            const q = questions[currentQuestion];
+            
+            Swal.fire({
+                title: 'Trivia del Amor ❓',
+                html: `<p style="font-size: 1.2rem; margin: 20px 0;">${q.q}</p>`,
+                icon: 'question',
+                showCancelButton: false,
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                didOpen: function(modal) {
+                    // Limpiar botones anteriores
+                    const buttonsContainer = modal.querySelector('.swal2-actions');
+                    if (buttonsContainer) {
+                        buttonsContainer.innerHTML = '';
+                    }
+                    
+                    // Crear botones para cada opción
+                    const buttonsHTML = q.options.map((opt, i) => 
+                        `<button class="swal2-confirm swal2-styled" style="background: #f5576c; margin: 5px;" onclick="handleTriviaAnswer(${i}, ${q.correct}, ${currentQuestion}, ${questions.length})">${opt}</button>`
+                    ).join('');
+                    
+                    if (buttonsContainer) {
+                        buttonsContainer.innerHTML = buttonsHTML;
+                    }
+                }
+            });
+        } else {
+            showTriviaResult();
+        }
+    }
+
+    window.handleTriviaAnswer = function(selected, correct, current, total) {
+        if (selected === correct) {
+            score++;
+            Swal.fire({
+                title: '¡Correcto! 🎉',
+                text: 'Excelente respuesta, mi amor',
+                icon: 'success',
+                confirmButtonColor: '#f5576c',
+                timer: 1500,
+                timerProgressBar: true
+            }).then(() => {
+                currentQuestion++;
+                showQuestion();
+            });
+        } else {
+            Swal.fire({
+                title: 'Casi, casi... ❤️',
+                text: 'La respuesta correcta era: ' + questions[current].options[correct],
+                icon: 'error',
+                confirmButtonColor: '#f5576c',
+                timer: 2000,
+                timerProgressBar: true
+            }).then(() => {
+                currentQuestion++;
+                showQuestion();
+            });
+        }
+    };
+
+    function showTriviaResult() {
+        Swal.fire({
+            title: '¡Fin del Trivia! 🏆',
+            html: `<p style="font-size: 2rem; color: #f5576c; margin: 20px 0;">${score}/${questions.length}</p><p>Eres increíble, mi amor ❤️</p>`,
+            icon: 'success',
+            confirmButtonColor: '#f5576c',
+            confirmButtonText: 'Cerrar'
+        }).then(() => {
+            closeGame();
+        });
     }
 
     showQuestion();
-
-    window.selectAnswer = function(selected, correct) {
-        if (selected === correct) {
-            score++;
-            alert('¡Correcto! 🎉');
-        } else {
-            alert('Casi, casi... ❤️');
-        }
-
-        currentQuestion++;
-        if (currentQuestion < questions.length) {
-            showQuestion();
-        } else {
-            container.innerHTML = `
-                <h3>¡Fin del Trivia! 🏆</h3>
-                <p style="font-size: 2rem; color: #f5576c; margin: 20px 0;">${score}/${questions.length}</p>
-                <p>Eres increíble, mi amor ❤️</p>
-                <button onclick="closeGame()" 
-                    style="padding: 10px 20px; background: #f5576c; color: white; border: none; 
-                    border-radius: 8px; cursor: pointer; margin-top: 20px;">
-                    Cerrar
-                </button>
-            `;
-        }
-    };
 }
 
 // Juego 3: Recoge Corazones
 function loadCorazonesGame(container) {
-    const gameArea = document.createElement('div');
-    gameArea.style.cssText = `
-        width: 100%;
-        height: 300px;
-        background: linear-gradient(135deg, #f093fb, #f5576c);
-        border-radius: 10px;
-        position: relative;
-        overflow: hidden;
-        cursor: crosshair;
-    `;
-
     let score = 0;
-    const scoreDisplay = document.createElement('p');
-    scoreDisplay.textContent = `Corazones recogidos: ${score}`;
-    scoreDisplay.style.marginBottom = '15px';
 
     const html = `
         <h3>Recoge Corazones 💕</h3>
-        ${scoreDisplay.outerHTML}
+        <p id="heartScore" style="font-size: 1.2rem; margin: 15px 0;">Corazones recogidos: <strong>0</strong></p>
         <div id="gameArea" style="width: 100%; height: 300px; background: linear-gradient(135deg, #f093fb, #f5576c); 
             border-radius: 10px; position: relative; overflow: hidden; cursor: crosshair; margin: 10px 0;"></div>
         <button onclick="closeGame()" 
@@ -317,39 +392,59 @@ function loadCorazonesGame(container) {
     container.innerHTML = html;
 
     const gameAreaEl = container.querySelector('#gameArea');
+    const scoreDisplay = container.querySelector('#heartScore');
 
     function createHeart() {
         const heart = document.createElement('div');
         heart.textContent = '❤️';
         heart.style.cssText = `
             position: absolute;
-            font-size: 2rem;
+            font-size: 2.5rem;
             cursor: pointer;
-            left: ${Math.random() * 90}%;
-            top: ${Math.random() * 90}%;
+            left: ${Math.random() * 85}%;
+            top: ${Math.random() * 85}%;
             user-select: none;
+            transition: all 0.1s;
         `;
 
-        heart.onclick = (e) => {
+        heart.addEventListener('click', (e) => {
             e.stopPropagation();
             score++;
-            scoreDisplay.textContent = `Corazones recogidos: ${score}`;
-            heart.remove();
+            scoreDisplay.innerHTML = `Corazones recogidos: <strong>${score}</strong>`;
+            heart.style.transform = 'scale(1.3) rotate(360deg)';
+            setTimeout(() => heart.remove(), 100);
             createHeart();
-        };
+        });
+
+        heart.addEventListener('mouseover', () => {
+            heart.style.transform = 'scale(1.1)';
+        });
+
+        heart.addEventListener('mouseout', () => {
+            heart.style.transform = 'scale(1)';
+        });
 
         gameAreaEl.appendChild(heart);
 
+        // Desaparecer después de 2.5 segundos
         setTimeout(() => {
             if (heart.parentNode) {
-                heart.remove();
-                createHeart();
+                heart.style.opacity = '0.3';
+                setTimeout(() => {
+                    if (heart.parentNode) {
+                        heart.remove();
+                        if (gameAreaEl.parentNode) {
+                            createHeart();
+                        }
+                    }
+                }, 200);
             }
-        }, 2000);
+        }, 2500);
     }
 
+    // Crear 3 corazones iniciales
     for (let i = 0; i < 3; i++) {
-        createHeart();
+        setTimeout(() => createHeart(), i * 300);
     }
 }
 
